@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mcipay.persistence.mapper.MerchantSettlementEntityMapper">
+  <resultMap id="BaseResultMap" type="com.mcipay.persistence.entity.MerchantSettlementEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="merchant_transaction_id" jdbcType="INTEGER" property="merchantTransactionId" />
+    <result column="settlement_status" jdbcType="INTEGER" property="settlementStatus" />
+    <result column="settlement_apply_operator" jdbcType="VARCHAR" property="settlementApplyOperator" />
+    <result column="settlement_apply_time" jdbcType="TIMESTAMP" property="settlementApplyTime" />
+    <result column="management_auditor" jdbcType="VARCHAR" property="managementAuditor" />
+    <result column="management_audit_result" jdbcType="TINYINT" property="managementAuditResult" />
+    <result column="management_audit_time" jdbcType="TIMESTAMP" property="managementAuditTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, merchant_transaction_id, settlement_status, settlement_apply_operator, settlement_apply_time, 
+    management_auditor, management_audit_result, management_audit_time
+  </sql>
+  <select id="selectByExample" parameterType="com.mcipay.persistence.entity.MerchantSettlementEntityCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from merchant_settlement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="page != null">
+      limit #{page.begin} , #{page.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from merchant_settlement
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from merchant_settlement
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mcipay.persistence.entity.MerchantSettlementEntityCriteria">
+    delete from merchant_settlement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.MerchantSettlementEntity" useGeneratedKeys="true">
+    insert into merchant_settlement (merchant_transaction_id, settlement_status, 
+      settlement_apply_operator, settlement_apply_time, 
+      management_auditor, management_audit_result, 
+      management_audit_time)
+    values (#{merchantTransactionId,jdbcType=INTEGER}, #{settlementStatus,jdbcType=INTEGER}, 
+      #{settlementApplyOperator,jdbcType=VARCHAR}, #{settlementApplyTime,jdbcType=TIMESTAMP}, 
+      #{managementAuditor,jdbcType=VARCHAR}, #{managementAuditResult,jdbcType=TINYINT}, 
+      #{managementAuditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.MerchantSettlementEntity" useGeneratedKeys="true">
+    insert into merchant_settlement
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="merchantTransactionId != null">
+        merchant_transaction_id,
+      </if>
+      <if test="settlementStatus != null">
+        settlement_status,
+      </if>
+      <if test="settlementApplyOperator != null">
+        settlement_apply_operator,
+      </if>
+      <if test="settlementApplyTime != null">
+        settlement_apply_time,
+      </if>
+      <if test="managementAuditor != null">
+        management_auditor,
+      </if>
+      <if test="managementAuditResult != null">
+        management_audit_result,
+      </if>
+      <if test="managementAuditTime != null">
+        management_audit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="merchantTransactionId != null">
+        #{merchantTransactionId,jdbcType=INTEGER},
+      </if>
+      <if test="settlementStatus != null">
+        #{settlementStatus,jdbcType=INTEGER},
+      </if>
+      <if test="settlementApplyOperator != null">
+        #{settlementApplyOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementApplyTime != null">
+        #{settlementApplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managementAuditor != null">
+        #{managementAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="managementAuditResult != null">
+        #{managementAuditResult,jdbcType=TINYINT},
+      </if>
+      <if test="managementAuditTime != null">
+        #{managementAuditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mcipay.persistence.entity.MerchantSettlementEntityCriteria" resultType="java.lang.Integer">
+    select count(*) from merchant_settlement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update merchant_settlement
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.merchantTransactionId != null">
+        merchant_transaction_id = #{record.merchantTransactionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.settlementStatus != null">
+        settlement_status = #{record.settlementStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.settlementApplyOperator != null">
+        settlement_apply_operator = #{record.settlementApplyOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settlementApplyTime != null">
+        settlement_apply_time = #{record.settlementApplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.managementAuditor != null">
+        management_auditor = #{record.managementAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managementAuditResult != null">
+        management_audit_result = #{record.managementAuditResult,jdbcType=TINYINT},
+      </if>
+      <if test="record.managementAuditTime != null">
+        management_audit_time = #{record.managementAuditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update merchant_settlement
+    set id = #{record.id,jdbcType=INTEGER},
+      merchant_transaction_id = #{record.merchantTransactionId,jdbcType=INTEGER},
+      settlement_status = #{record.settlementStatus,jdbcType=INTEGER},
+      settlement_apply_operator = #{record.settlementApplyOperator,jdbcType=VARCHAR},
+      settlement_apply_time = #{record.settlementApplyTime,jdbcType=TIMESTAMP},
+      management_auditor = #{record.managementAuditor,jdbcType=VARCHAR},
+      management_audit_result = #{record.managementAuditResult,jdbcType=TINYINT},
+      management_audit_time = #{record.managementAuditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mcipay.persistence.entity.MerchantSettlementEntity">
+    update merchant_settlement
+    <set>
+      <if test="merchantTransactionId != null">
+        merchant_transaction_id = #{merchantTransactionId,jdbcType=INTEGER},
+      </if>
+      <if test="settlementStatus != null">
+        settlement_status = #{settlementStatus,jdbcType=INTEGER},
+      </if>
+      <if test="settlementApplyOperator != null">
+        settlement_apply_operator = #{settlementApplyOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="settlementApplyTime != null">
+        settlement_apply_time = #{settlementApplyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managementAuditor != null">
+        management_auditor = #{managementAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="managementAuditResult != null">
+        management_audit_result = #{managementAuditResult,jdbcType=TINYINT},
+      </if>
+      <if test="managementAuditTime != null">
+        management_audit_time = #{managementAuditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mcipay.persistence.entity.MerchantSettlementEntity">
+    update merchant_settlement
+    set merchant_transaction_id = #{merchantTransactionId,jdbcType=INTEGER},
+      settlement_status = #{settlementStatus,jdbcType=INTEGER},
+      settlement_apply_operator = #{settlementApplyOperator,jdbcType=VARCHAR},
+      settlement_apply_time = #{settlementApplyTime,jdbcType=TIMESTAMP},
+      management_auditor = #{managementAuditor,jdbcType=VARCHAR},
+      management_audit_result = #{managementAuditResult,jdbcType=TINYINT},
+      management_audit_time = #{managementAuditTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
