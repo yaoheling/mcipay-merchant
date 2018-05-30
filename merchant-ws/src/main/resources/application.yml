@@ -3,10 +3,25 @@ spring:
     name: Merchant
   profiles:
     active: dev
+  jackson:
+    date-format: com.mcipay.config.swagger2.RFC3339DateFormat
+    serialization.WRITE_DATES_AS_TIMESTAMPS: false
 server:
   port: 8080
+#  context-path: /v2
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /api-docs
 
 
 
 logging:
   config: classpath:logback-spring.xml
+
+#springfox.documentation.swagger.v2.path=/api-docs
+#server.contextPath=/v2
+#server.port=8080
+#spring.jackson.date-format=io.swagger.RFC3339DateFormat
+#spring.jackson.serialization.WRITE_DATES_AS_TIMESTAMPS=false
