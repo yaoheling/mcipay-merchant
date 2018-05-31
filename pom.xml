@@ -25,6 +25,7 @@
 
     <properties>
         <org.springframework.boot>1.5.10.RELEASE</org.springframework.boot>
+        <springfox-version>2.7.0</springfox-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <com.google.guava.version>24.0-jre</com.google.guava.version>
         <com.alibaba.fastjson.version>1.2.46</com.alibaba.fastjson.version>
