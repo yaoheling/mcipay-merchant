@@ -1,5 +1,6 @@
 package com.mcipay;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
@@ -8,9 +9,9 @@ import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-//@ImportResource(locations={"classpath*:application-infrastructure.xml"})
 @EnableSwagger2
 @ComponentScan(basePackages = { "com.mcipay", "com.mcipay.api" })
+@MapperScan("com.mcipay.persistence.mapper")
 public class Bootstrap implements CommandLineRunner {
 
     @Override

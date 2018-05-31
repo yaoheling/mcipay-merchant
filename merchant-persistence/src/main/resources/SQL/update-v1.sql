@@ -71,3 +71,35 @@ CREATE TABLE `payment_journal` (
   `trans_modify_time` datetime DEFAULT NULL COMMENT '三方交易状态修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='交易流水表，实际发送到三方的请求';
+
+--  2018-05-31 start
+CREATE TABLE `merchant_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(128) DEFAULT NULL COMMENT '商户全称',
+  `short_name` varchar(64) DEFAULT NULL COMMENT '商户简称',
+  `business_scop` varchar(64) DEFAULT NULL COMMENT '经营范围',
+  `city` varchar(64) DEFAULT NULL COMMENT '所在城市',
+  `address` varchar(128) DEFAULT NULL COMMENT '地址',
+  `email` varchar(128) DEFAULT NULL COMMENT '邮箱',
+  `phone_number` varchar(64) DEFAULT NULL COMMENT '电话',
+  `mobile_number` varchar(64) DEFAULT NULL COMMENT '手机号',
+  `service_hotline` varchar(64) DEFAULT NULL COMMENT '客服热线',
+  `qq` varchar(64) DEFAULT NULL COMMENT 'QQ号',
+  `operator_id` varchar(64) DEFAULT NULL COMMENT '录入人ID',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='商户信息表';
+
+CREATE TABLE `merchant_bank_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `merchant_id` int(11) DEFAULT NULL COMMENT '商户信息表主键',
+  `name` varchar(64) DEFAULT NULL COMMENT '银行卡姓名',
+  `id_card_no` varchar(64) DEFAULT NULL COMMENT '身份证号',
+  `mobile_no` varchar(32) DEFAULT NULL COMMENT '手机号',
+  `bank_card_no` varchar(32) DEFAULT NULL COMMENT '银行卡号',
+  `bank_code` varchar(32) DEFAULT NULL COMMENT '开户行',
+  `bank_branch` varchar(64) DEFAULT NULL COMMENT '开户分行',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='商户银行信息表';
+
+--  2018-05-31 end
