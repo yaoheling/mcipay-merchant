@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: MerchantAdmin
+  profiles:
+    active: dev
+server:
+  port: 8090
+
+logging:
+  config: classpath:logback-spring.xml
