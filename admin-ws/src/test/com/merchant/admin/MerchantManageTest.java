@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MerchantManageTest {
@@ -20,7 +22,8 @@ public class MerchantManageTest {
     public void saveMerchantInfo() {
         MerchantInfoEntity merchantInfo = new MerchantInfoEntity();
         MerchantBankInfoEntity merchantBankInfo = new MerchantBankInfoEntity();
-        merchantManageService.saveMerchantInfo(merchantInfo, merchantBankInfo);
+        merchantInfo.setFullName("" + System.nanoTime());
+        merchantManageService.saveMerchantInfo(merchantInfo, Arrays.asList(merchantBankInfo));
     }
 
 }

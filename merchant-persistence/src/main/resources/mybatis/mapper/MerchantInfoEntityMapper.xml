@@ -9,6 +9,8 @@
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="open_time" jdbcType="TIMESTAMP" property="openTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
     <result column="mobile_number" jdbcType="VARCHAR" property="mobileNumber" />
     <result column="service_hotline" jdbcType="VARCHAR" property="serviceHotline" />
@@ -75,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, full_name, short_name, business_scop, city, address, email, phone_number, mobile_number, 
-    service_hotline, qq, operator_id, create_time
+    id, full_name, short_name, business_scop, city, address, email, open_time, end_time, 
+    phone_number, mobile_number, service_hotline, qq, operator_id, create_time
   </sql>
   <select id="selectByExample" parameterType="com.mcipay.persistence.entity.MerchantInfoEntityCriteria" resultMap="BaseResultMap">
     select
@@ -115,14 +117,14 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.MerchantInfoEntity" useGeneratedKeys="true">
     insert into merchant_info (full_name, short_name, business_scop, 
       city, address, email, 
-      phone_number, mobile_number, service_hotline, 
-      qq, operator_id, create_time
-      )
+      open_time, end_time, phone_number, 
+      mobile_number, service_hotline, qq, 
+      operator_id, create_time)
     values (#{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, #{businessScop,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{phoneNumber,jdbcType=VARCHAR}, #{mobileNumber,jdbcType=VARCHAR}, #{serviceHotline,jdbcType=VARCHAR}, 
-      #{qq,jdbcType=VARCHAR}, #{operatorId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{openTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{mobileNumber,jdbcType=VARCHAR}, #{serviceHotline,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{operatorId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.MerchantInfoEntity" useGeneratedKeys="true">
     insert into merchant_info
@@ -144,6 +146,12 @@
       </if>
       <if test="email != null">
         email,
+      </if>
+      <if test="openTime != null">
+        open_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
       </if>
       <if test="phoneNumber != null">
         phone_number,
@@ -182,6 +190,12 @@
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="openTime != null">
+        #{openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="phoneNumber != null">
         #{phoneNumber,jdbcType=VARCHAR},
@@ -233,6 +247,12 @@
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
+      <if test="record.openTime != null">
+        open_time = #{record.openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.phoneNumber != null">
         phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
       </if>
@@ -265,6 +285,8 @@
       city = #{record.city,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
+      open_time = #{record.openTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
       phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
       mobile_number = #{record.mobileNumber,jdbcType=VARCHAR},
       service_hotline = #{record.serviceHotline,jdbcType=VARCHAR},
@@ -296,6 +318,12 @@
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
+      <if test="openTime != null">
+        open_time = #{openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="phoneNumber != null">
         phone_number = #{phoneNumber,jdbcType=VARCHAR},
       </if>
@@ -325,6 +353,8 @@
       city = #{city,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
+      open_time = #{openTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
       mobile_number = #{mobileNumber,jdbcType=VARCHAR},
       service_hotline = #{serviceHotline,jdbcType=VARCHAR},

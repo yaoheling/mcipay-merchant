@@ -17,6 +17,10 @@ public class MerchantInfoEntity {
 
     private String email;
 
+    private Date openTime;
+
+    private Date endTime;
+
     private String phoneNumber;
 
     private String mobileNumber;
@@ -83,6 +87,22 @@ public class MerchantInfoEntity {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
+    }
+
+    public Date getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(Date openTime) {
+        this.openTime = openTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public String getPhoneNumber() {
