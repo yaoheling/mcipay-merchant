@@ -1,4 +1,4 @@
-package com.merchant.admin.service;
+package com.merchant.client.service;
 
 import com.mcipay.page.Page;
 import com.mcipay.persistence.entity.MerchantTransactionEntity;
@@ -6,9 +6,9 @@ import com.mcipay.persistence.entity.MerchantTransactionEntityCriteria;
 import com.mcipay.persistence.mapper.MerchantTransactionEntityMapper;
 import com.merchant.util.DateUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class MerchantTransactionService {
 
-    @Autowired
+    @Resource
     private MerchantTransactionEntityMapper merchantTransactionEntityMapper;
 
     /**

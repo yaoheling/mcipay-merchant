@@ -2,13 +2,16 @@ package com.mcipay.controller;
 
 import com.mcipay.page.Page;
 import com.mcipay.persistence.entity.MerchantTransactionEntity;
-import com.merchant.admin.service.MerchantTransactionService;
+import com.merchant.client.service.MerchantTransactionService;
 import com.merchant.util.BaseResponse;
 import io.swagger.annotations.Api;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -20,11 +23,20 @@ import java.util.List;
 @RequestMapping("/api/client/merchantTransaction")
 public class MerchantTransactionController {
 
-    @Autowired
+    @Resource
     private MerchantTransactionService merchantTransactionService;
 
-
-    public BaseResponse getList(Page page, MerchantTransactionEntity entity, String startTime, String endTime) {
+    @ApiOperation("交易查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "分页实体", required = true, dataType = "Page"),
+            @ApiImplicitParam(name = "entity", value = "交易信息实体", required = true, dataType = "MerchantTransactionEntity"),
+            @ApiImplicitParam(name = "startTime", value = "开始时间", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "endTime", value = "结束时间", required = true, dataType = "String"),
+    })
+    @GetMapping(value = "/getList")
+    @ResponseBody
+    public BaseResponse getList(@RequestBody Page page, @RequestBody MerchantTransactionEntity entity,
+                                @RequestParam String startTime, @RequestParam String endTime) {
 
         List<MerchantTransactionEntity> list = merchantTransactionService.getList(page, entity, startTime, endTime);
         return BaseResponse.success("查询成功", list);
