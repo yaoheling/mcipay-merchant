@@ -4,6 +4,7 @@ import com.mcipay.page.Page;
 import com.mcipay.persistence.entity.MerchantTransactionEntity;
 import com.mcipay.persistence.entity.MerchantTransactionEntityCriteria;
 import com.mcipay.persistence.mapper.MerchantTransactionEntityMapper;
+import com.merchant.util.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,8 @@ public class MerchantTransactionService {
      * @param entity
      * @return
      */
-    public List<MerchantTransactionEntity> getList(Page page, MerchantTransactionEntity entity) {
+    public List<MerchantTransactionEntity> getList(Page page, MerchantTransactionEntity entity,
+                                                   String startTime, String endTime) {
         MerchantTransactionEntityCriteria criteria = new MerchantTransactionEntityCriteria();
         MerchantTransactionEntityCriteria.Criteria query = criteria.or();
         criteria.setPage(page);
@@ -39,7 +41,13 @@ public class MerchantTransactionService {
         if (StringUtils.isNotBlank(entity.getMerchantCardType())) {
             query.andMerchantCardTypeEqualTo(entity.getMerchantCardType());
         }
+        if (StringUtils.isNotBlank(startTime)) {
+            query.andManagementTransTimeGreaterThanOrEqualTo(DateUtils.stringToDate(startTime, DateUtils.FORMAT_YYYY_MM_DD));
+        }
+        if (StringUtils.isNotBlank(endTime)) {
+            query.andManagementTransTimeLessThanOrEqualTo(DateUtils.getSpecificTime(endTime, 1));
+        }
         criteria.setOrderByClause(" id desc ");
-        merchantTransactionEntityMapper.selectByExample(criteria);
+        return merchantTransactionEntityMapper.selectByExample(criteria);
     }
 }
