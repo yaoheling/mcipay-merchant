@@ -3,6 +3,7 @@
 <mapper namespace="com.mcipay.persistence.mapper.MerchantInfoEntityMapper">
   <resultMap id="BaseResultMap" type="com.mcipay.persistence.entity.MerchantInfoEntity">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="full_name" jdbcType="VARCHAR" property="fullName" />
     <result column="short_name" jdbcType="VARCHAR" property="shortName" />
     <result column="business_scop" jdbcType="VARCHAR" property="businessScop" />
@@ -77,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, full_name, short_name, business_scop, city, address, email, open_time, end_time, 
-    phone_number, mobile_number, service_hotline, qq, operator_id, create_time
+    id, status, full_name, short_name, business_scop, city, address, email, open_time, 
+    end_time, phone_number, mobile_number, service_hotline, qq, operator_id, create_time
   </sql>
   <select id="selectByExample" parameterType="com.mcipay.persistence.entity.MerchantInfoEntityCriteria" resultMap="BaseResultMap">
     select
@@ -115,20 +116,25 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.MerchantInfoEntity" useGeneratedKeys="true">
-    insert into merchant_info (full_name, short_name, business_scop, 
-      city, address, email, 
-      open_time, end_time, phone_number, 
-      mobile_number, service_hotline, qq, 
-      operator_id, create_time)
-    values (#{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, #{businessScop,jdbcType=VARCHAR}, 
-      #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{openTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{phoneNumber,jdbcType=VARCHAR}, 
-      #{mobileNumber,jdbcType=VARCHAR}, #{serviceHotline,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
-      #{operatorId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    insert into merchant_info (status, full_name, short_name, 
+      business_scop, city, address, 
+      email, open_time, end_time, 
+      phone_number, mobile_number, service_hotline, 
+      qq, operator_id, create_time
+      )
+    values (#{status,jdbcType=INTEGER}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
+      #{businessScop,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{openTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{phoneNumber,jdbcType=VARCHAR}, #{mobileNumber,jdbcType=VARCHAR}, #{serviceHotline,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{operatorId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.MerchantInfoEntity" useGeneratedKeys="true">
     insert into merchant_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="status != null">
+        status,
+      </if>
       <if test="fullName != null">
         full_name,
       </if>
@@ -173,6 +179,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
       <if test="fullName != null">
         #{fullName,jdbcType=VARCHAR},
       </if>
@@ -229,6 +238,9 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
       <if test="record.fullName != null">
         full_name = #{record.fullName,jdbcType=VARCHAR},
       </if>
@@ -279,6 +291,7 @@
   <update id="updateByExample" parameterType="map">
     update merchant_info
     set id = #{record.id,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
       full_name = #{record.fullName,jdbcType=VARCHAR},
       short_name = #{record.shortName,jdbcType=VARCHAR},
       business_scop = #{record.businessScop,jdbcType=VARCHAR},
@@ -300,6 +313,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.mcipay.persistence.entity.MerchantInfoEntity">
     update merchant_info
     <set>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
       <if test="fullName != null">
         full_name = #{fullName,jdbcType=VARCHAR},
       </if>
@@ -347,7 +363,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mcipay.persistence.entity.MerchantInfoEntity">
     update merchant_info
-    set full_name = #{fullName,jdbcType=VARCHAR},
+    set status = #{status,jdbcType=INTEGER},
+      full_name = #{fullName,jdbcType=VARCHAR},
       short_name = #{shortName,jdbcType=VARCHAR},
       business_scop = #{businessScop,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},

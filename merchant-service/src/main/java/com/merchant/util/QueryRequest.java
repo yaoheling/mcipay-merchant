@@ -1,6 +1,6 @@
 package com.merchant.util;
 
-public class BaseQueryRequest {
+public class QueryRequest {
 
     // 第几页 起始页 1
     private Integer pageNo;
@@ -15,4 +15,17 @@ public class BaseQueryRequest {
     public Integer getPageSize() {
         return pageSize;
     }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
 }

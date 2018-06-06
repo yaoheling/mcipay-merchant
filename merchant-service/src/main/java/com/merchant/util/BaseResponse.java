@@ -2,7 +2,7 @@ package com.merchant.util;
 
 public class BaseResponse {
 
-    private ResponseCode code = ResponseCode.FAILED;
+    private ResponseCode code = ResponseCode.ERROR;
     private String message;
     private Object data;
 
@@ -35,6 +35,14 @@ public class BaseResponse {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    public void success() {
+        this.code = ResponseCode.SUCCESS;
+    }
+
+    public void error() {
+        this.code = ResponseCode.ERROR;
     }
 
     @Override

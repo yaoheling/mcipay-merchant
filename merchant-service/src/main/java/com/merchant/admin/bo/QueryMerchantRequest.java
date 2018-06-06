@@ -1,7 +1,7 @@
 package com.merchant.admin.bo;
 
-import com.merchant.util.BaseQueryRequest;
+import com.merchant.util.QueryRequest;
 
-public class QueryMerchantRequest extends BaseQueryRequest {
+public class QueryMerchantRequest extends QueryRequest {
 
 }

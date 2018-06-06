@@ -5,6 +5,8 @@ import java.util.Date;
 public class MerchantInfoEntity {
     private Integer id;
 
+    private Integer status;
+
     private String fullName;
 
     private String shortName;
@@ -39,6 +41,14 @@ public class MerchantInfoEntity {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getFullName() {
