@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-@ComponentScan(basePackages = { "com.mcipay", "com.mcipay.api" })
+@ComponentScan(basePackages = { "com.mcipay", "com.merchant" })
 public class Bootstrap implements CommandLineRunner {
 
     @Override

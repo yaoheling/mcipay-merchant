@@ -9,6 +9,38 @@ public class BaseResponse {
     public BaseResponse() {
     }
 
+    public static BaseResponse success(String message) {
+        return success(message, null);
+    }
+
+    public static BaseResponse success(Object data) {
+        return success(null, data);
+    }
+
+    public static BaseResponse success(String message, Object data) {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setCode(ResponseCode.SUCCESS);
+        baseResponse.setMessage(message);
+        baseResponse.setData(data);
+        return baseResponse;
+    }
+
+    public static BaseResponse failed(String message) {
+        return failed(message, null);
+    }
+
+    public static BaseResponse failed(Object data) {
+        return failed(null, data);
+    }
+
+    public static BaseResponse failed(String message, Object data) {
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setCode(ResponseCode.FAILED);
+        baseResponse.setMessage(message);
+        baseResponse.setData(data);
+        return baseResponse;
+    }
+
     public BaseResponse(ResponseCode code) {
         this.code = code;
     }
