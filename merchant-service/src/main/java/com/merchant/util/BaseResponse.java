@@ -35,7 +35,7 @@ public class BaseResponse {
 
     public static BaseResponse failed(String message, Object data) {
         BaseResponse baseResponse = new BaseResponse();
-        baseResponse.setCode(ResponseCode.FAILED);
+        baseResponse.setCode(ResponseCode.ERROR);
         baseResponse.setMessage(message);
         baseResponse.setData(data);
         return baseResponse;
