@@ -11,7 +11,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>admin-ws</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>admin-ws Maven Webapp</name>
 
     <dependencies>
