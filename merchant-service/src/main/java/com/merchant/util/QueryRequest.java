@@ -8,7 +8,7 @@ public class QueryRequest {
     // 每页条数
     private Integer pageSize;
 
-    public int getSqlStart() {
+    public Integer getSqlStart() {
         return (pageNo - 1) * pageSize;
     }
 

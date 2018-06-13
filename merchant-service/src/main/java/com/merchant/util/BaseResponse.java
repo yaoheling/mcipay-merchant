@@ -77,6 +77,10 @@ public class BaseResponse {
         this.code = ResponseCode.ERROR;
     }
 
+    public boolean isSuccess() {
+        return ResponseCode.SUCCESS.equals(this.code);
+    }
+
     @Override
     public String toString() {
         return JsonUtil.toJson(this);

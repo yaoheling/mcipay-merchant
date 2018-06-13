@@ -71,8 +71,14 @@ public class MerchantManageService {
      */
     public BaseResponse queryMerchantList(QueryMerchantRequest request) {
         MerchantInfoEntityCriteria condition = new MerchantInfoEntityCriteria();
-        Page page = new Page(request.getSqlStart(), request.getPageSize());
-        condition.setPage(page);
+        MerchantInfoEntityCriteria.Criteria criteria = condition.createCriteria();
+        if(request.getMerchantId() != null) {
+            criteria.andIdEqualTo(request.getMerchantId());
+        }
+        if(request.getPageNo() != null && request.getPageSize() != null) {
+            Page page = new Page(request.getSqlStart(), request.getPageSize());
+            condition.setPage(page);
+        }
         List<CompleteMerchantInfoEntity> list = completeMerchantInfoMapper.selectByExample(condition);
 
         MerchantInfoEntityCriteria countCondition = new MerchantInfoEntityCriteria();
@@ -125,6 +131,9 @@ public class MerchantManageService {
         return response;
     }
 
+    /**
+     * 批量导入商户信息
+     */
     public void batchInsertMerchant(List<SaveMerchantInfo> saveMerchantInfoList) {
         for (SaveMerchantInfo saveMerchantInfo : saveMerchantInfoList) {
             saveMerchantInfo(saveMerchantInfo.getMerchantInfo(), saveMerchantInfo.getMerchantBankInfoEntityList());
