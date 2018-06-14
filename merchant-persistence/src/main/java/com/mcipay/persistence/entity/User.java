@@ -17,13 +17,17 @@ public class User {
 
     private Integer status;
 
+    private Integer parentId;
+
     private Date createTime;
+
+    private String loginIp;
+
+    private String loginAddress;
 
     private Date loginTime;
 
     private Date lastLoginTime;
-
-    private Integer parentId;
 
     public Integer getId() {
         return id;
@@ -81,12 +85,36 @@ public class User {
         this.status = status;
     }
 
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getLoginIp() {
+        return loginIp;
+    }
+
+    public void setLoginIp(String loginIp) {
+        this.loginIp = loginIp == null ? null : loginIp.trim();
+    }
+
+    public String getLoginAddress() {
+        return loginAddress;
+    }
+
+    public void setLoginAddress(String loginAddress) {
+        this.loginAddress = loginAddress == null ? null : loginAddress.trim();
     }
 
     public Date getLoginTime() {
@@ -103,13 +131,5 @@ public class User {
 
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
     }
 }

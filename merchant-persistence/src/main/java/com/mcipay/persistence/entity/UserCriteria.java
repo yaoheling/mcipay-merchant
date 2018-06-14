@@ -586,6 +586,66 @@ public class UserCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andParentIdIsNull() {
+            addCriterion("parent_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdIsNotNull() {
+            addCriterion("parent_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdEqualTo(Integer value) {
+            addCriterion("parent_id =", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdNotEqualTo(Integer value) {
+            addCriterion("parent_id <>", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdGreaterThan(Integer value) {
+            addCriterion("parent_id >", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("parent_id >=", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdLessThan(Integer value) {
+            addCriterion("parent_id <", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdLessThanOrEqualTo(Integer value) {
+            addCriterion("parent_id <=", value, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdIn(List<Integer> values) {
+            addCriterion("parent_id in", values, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdNotIn(List<Integer> values) {
+            addCriterion("parent_id not in", values, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdBetween(Integer value1, Integer value2) {
+            addCriterion("parent_id between", value1, value2, "parentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("parent_id not between", value1, value2, "parentId");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;
@@ -643,6 +703,146 @@ public class UserCriteria {
 
         public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
             addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpIsNull() {
+            addCriterion("login_ip is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpIsNotNull() {
+            addCriterion("login_ip is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpEqualTo(String value) {
+            addCriterion("login_ip =", value, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpNotEqualTo(String value) {
+            addCriterion("login_ip <>", value, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpGreaterThan(String value) {
+            addCriterion("login_ip >", value, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpGreaterThanOrEqualTo(String value) {
+            addCriterion("login_ip >=", value, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpLessThan(String value) {
+            addCriterion("login_ip <", value, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpLessThanOrEqualTo(String value) {
+            addCriterion("login_ip <=", value, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpLike(String value) {
+            addCriterion("login_ip like", value, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpNotLike(String value) {
+            addCriterion("login_ip not like", value, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpIn(List<String> values) {
+            addCriterion("login_ip in", values, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpNotIn(List<String> values) {
+            addCriterion("login_ip not in", values, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpBetween(String value1, String value2) {
+            addCriterion("login_ip between", value1, value2, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginIpNotBetween(String value1, String value2) {
+            addCriterion("login_ip not between", value1, value2, "loginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressIsNull() {
+            addCriterion("login_address is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressIsNotNull() {
+            addCriterion("login_address is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressEqualTo(String value) {
+            addCriterion("login_address =", value, "loginAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressNotEqualTo(String value) {
+            addCriterion("login_address <>", value, "loginAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressGreaterThan(String value) {
+            addCriterion("login_address >", value, "loginAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressGreaterThanOrEqualTo(String value) {
+            addCriterion("login_address >=", value, "loginAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressLessThan(String value) {
+            addCriterion("login_address <", value, "loginAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressLessThanOrEqualTo(String value) {
+            addCriterion("login_address <=", value, "loginAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressLike(String value) {
+            addCriterion("login_address like", value, "loginAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressNotLike(String value) {
+            addCriterion("login_address not like", value, "loginAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressIn(List<String> values) {
+            addCriterion("login_address in", values, "loginAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressNotIn(List<String> values) {
+            addCriterion("login_address not in", values, "loginAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressBetween(String value1, String value2) {
+            addCriterion("login_address between", value1, value2, "loginAddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginAddressNotBetween(String value1, String value2) {
+            addCriterion("login_address not between", value1, value2, "loginAddress");
             return (Criteria) this;
         }
 
@@ -763,66 +963,6 @@ public class UserCriteria {
 
         public Criteria andLastLoginTimeNotBetween(Date value1, Date value2) {
             addCriterion("last_login_time not between", value1, value2, "lastLoginTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdIsNull() {
-            addCriterion("parent_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdIsNotNull() {
-            addCriterion("parent_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdEqualTo(Integer value) {
-            addCriterion("parent_id =", value, "parentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdNotEqualTo(Integer value) {
-            addCriterion("parent_id <>", value, "parentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdGreaterThan(Integer value) {
-            addCriterion("parent_id >", value, "parentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("parent_id >=", value, "parentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdLessThan(Integer value) {
-            addCriterion("parent_id <", value, "parentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdLessThanOrEqualTo(Integer value) {
-            addCriterion("parent_id <=", value, "parentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdIn(List<Integer> values) {
-            addCriterion("parent_id in", values, "parentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdNotIn(List<Integer> values) {
-            addCriterion("parent_id not in", values, "parentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdBetween(Integer value1, Integer value2) {
-            addCriterion("parent_id between", value1, value2, "parentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("parent_id not between", value1, value2, "parentId");
             return (Criteria) this;
         }
     }
