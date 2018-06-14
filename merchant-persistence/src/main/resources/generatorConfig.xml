@@ -83,7 +83,31 @@
             <generatedKey column="id" sqlStatement="JDBC" identity="true" />
         </table>-->
 
-        <table tableName="users"  domainObjectName="User" enableCountByExample="true"
+        <table tableName="users" domainObjectName="User" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
+            <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="JDBC" identity="true" />
+        </table>
+
+        <table tableName="role" domainObjectName="Role" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
+            <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="JDBC" identity="true" />
+        </table>
+
+        <table tableName="right" domainObjectName="Right" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
+            <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="JDBC" identity="true" />
+        </table>
+
+        <table tableName="role_right" domainObjectName="RoleRight" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
+            <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="JDBC" identity="true" />
+        </table>
+
+        <table tableName="user_role" domainObjectName="UserRole" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
             <property name="useActualColumnNames" value="false" />
             <generatedKey column="id" sqlStatement="JDBC" identity="true" />
