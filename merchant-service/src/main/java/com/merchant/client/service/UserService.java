@@ -92,7 +92,8 @@ public class UserService {
         if (id == null) {
             throw new BusinessException("ID不能为空");
         }
-        //todo 删除权限信息
+        //删除用户角色关系
+
         return userMapper.deleteByPrimaryKey(id);
     }
 
