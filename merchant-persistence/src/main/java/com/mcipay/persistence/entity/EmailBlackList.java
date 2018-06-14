@@ -2,12 +2,32 @@ package com.mcipay.persistence.entity;
 
 import java.util.Date;
 
-public class EmailBlackList extends EmailBlackListKey {
+public class EmailBlackList {
+    private Integer id;
+
+    private String email;
+
     private Date createTime;
 
     private Date updateTime;
 
     private String status;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
 
     public Date getCreateTime() {
         return createTime;

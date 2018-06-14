@@ -3,12 +3,12 @@ package com.merchant.client.service;
 import com.mcipay.page.Page;
 import com.mcipay.persistence.entity.EmailBlackList;
 import com.mcipay.persistence.entity.EmailBlackListCriteria;
-import com.mcipay.persistence.entity.EmailBlackListKey;
 import com.mcipay.persistence.mapper.EmailBlackListMapper;
 import com.mcipay.persistence.mapper.manual.CustomerEmailBlackListMapper;
 import com.merchant.exception.BusinessException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -29,9 +29,17 @@ public class EmailBlackListService {
     private CustomerEmailBlackListMapper customerEmailBlackListMapper;
 
     public EmailBlackList get(String email) {
-        EmailBlackListKey key = new EmailBlackList();
-        key.setEmail(email);
-        return emailBlackListMapper.selectByPrimaryKey(key);
+        if (StringUtils.isBlank(email)) {
+            throw new BusinessException("邮箱不能为空");
+        }
+        EmailBlackListCriteria criteria = new EmailBlackListCriteria();
+        EmailBlackListCriteria.Criteria query = criteria.or();
+        query.andEmailEqualTo(email);
+        List<EmailBlackList> lists = emailBlackListMapper.selectByExample(criteria);
+        if (CollectionUtils.isEmpty(lists)) {
+            return null;
+        }
+        return lists.get(0);
     }
 
     public int save(String email) {
@@ -94,10 +102,7 @@ public class EmailBlackListService {
         if (id == null) {
             throw new BusinessException("ID不能为空");
         }
-        EmailBlackListCriteria criteria = new EmailBlackListCriteria();
-        EmailBlackListCriteria.Criteria query = criteria.or();
-        query.andIdEqualTo(id);
-        return emailBlackListMapper.deleteByExample(criteria);
+        return emailBlackListMapper.deleteByPrimaryKey(id);
     }
 
     public void deleteBatch(String ids) {

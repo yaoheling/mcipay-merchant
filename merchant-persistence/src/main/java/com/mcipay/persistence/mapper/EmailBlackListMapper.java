@@ -2,7 +2,6 @@ package com.mcipay.persistence.mapper;
 
 import com.mcipay.persistence.entity.EmailBlackList;
 import com.mcipay.persistence.entity.EmailBlackListCriteria;
-import com.mcipay.persistence.entity.EmailBlackListKey;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +10,7 @@ public interface EmailBlackListMapper {
 
     int deleteByExample(EmailBlackListCriteria example);
 
-    int deleteByPrimaryKey(EmailBlackListKey key);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(EmailBlackList record);
 
@@ -19,7 +18,7 @@ public interface EmailBlackListMapper {
 
     List<EmailBlackList> selectByExample(EmailBlackListCriteria example);
 
-    EmailBlackList selectByPrimaryKey(EmailBlackListKey key);
+    EmailBlackList selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") EmailBlackList record, @Param("example") EmailBlackListCriteria example);
 
