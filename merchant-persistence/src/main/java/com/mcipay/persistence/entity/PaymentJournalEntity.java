@@ -1,5 +1,6 @@
 package com.mcipay.persistence.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class PaymentJournalEntity {
@@ -9,11 +10,7 @@ public class PaymentJournalEntity {
 
     private String userCardNumber;
 
-    private Long merchantCnyAmount;
-
-    private Long managementTransAmount;
-
-    private Long managementServiceCharge;
+    private BigDecimal managementTransAmount;
 
     private Integer transStatus;
 
@@ -45,28 +42,12 @@ public class PaymentJournalEntity {
         this.userCardNumber = userCardNumber == null ? null : userCardNumber.trim();
     }
 
-    public Long getMerchantCnyAmount() {
-        return merchantCnyAmount;
-    }
-
-    public void setMerchantCnyAmount(Long merchantCnyAmount) {
-        this.merchantCnyAmount = merchantCnyAmount;
-    }
-
-    public Long getManagementTransAmount() {
+    public BigDecimal getManagementTransAmount() {
         return managementTransAmount;
     }
 
-    public void setManagementTransAmount(Long managementTransAmount) {
+    public void setManagementTransAmount(BigDecimal managementTransAmount) {
         this.managementTransAmount = managementTransAmount;
-    }
-
-    public Long getManagementServiceCharge() {
-        return managementServiceCharge;
-    }
-
-    public void setManagementServiceCharge(Long managementServiceCharge) {
-        this.managementServiceCharge = managementServiceCharge;
     }
 
     public Integer getTransStatus() {

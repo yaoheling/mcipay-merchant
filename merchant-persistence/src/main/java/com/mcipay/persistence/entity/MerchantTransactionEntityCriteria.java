@@ -1,6 +1,7 @@
 package com.mcipay.persistence.entity;
 
 import com.mcipay.page.Page;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -186,62 +187,52 @@ public class MerchantTransactionEntityCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andMerchantIdEqualTo(String value) {
+        public Criteria andMerchantIdEqualTo(Integer value) {
             addCriterion("merchant_id =", value, "merchantId");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantIdNotEqualTo(String value) {
+        public Criteria andMerchantIdNotEqualTo(Integer value) {
             addCriterion("merchant_id <>", value, "merchantId");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantIdGreaterThan(String value) {
+        public Criteria andMerchantIdGreaterThan(Integer value) {
             addCriterion("merchant_id >", value, "merchantId");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantIdGreaterThanOrEqualTo(String value) {
+        public Criteria andMerchantIdGreaterThanOrEqualTo(Integer value) {
             addCriterion("merchant_id >=", value, "merchantId");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantIdLessThan(String value) {
+        public Criteria andMerchantIdLessThan(Integer value) {
             addCriterion("merchant_id <", value, "merchantId");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantIdLessThanOrEqualTo(String value) {
+        public Criteria andMerchantIdLessThanOrEqualTo(Integer value) {
             addCriterion("merchant_id <=", value, "merchantId");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantIdLike(String value) {
-            addCriterion("merchant_id like", value, "merchantId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantIdNotLike(String value) {
-            addCriterion("merchant_id not like", value, "merchantId");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantIdIn(List<String> values) {
+        public Criteria andMerchantIdIn(List<Integer> values) {
             addCriterion("merchant_id in", values, "merchantId");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantIdNotIn(List<String> values) {
+        public Criteria andMerchantIdNotIn(List<Integer> values) {
             addCriterion("merchant_id not in", values, "merchantId");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantIdBetween(String value1, String value2) {
+        public Criteria andMerchantIdBetween(Integer value1, Integer value2) {
             addCriterion("merchant_id between", value1, value2, "merchantId");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantIdNotBetween(String value1, String value2) {
+        public Criteria andMerchantIdNotBetween(Integer value1, Integer value2) {
             addCriterion("merchant_id not between", value1, value2, "merchantId");
             return (Criteria) this;
         }
@@ -656,52 +647,52 @@ public class MerchantTransactionEntityCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andMerchantForeignAmountEqualTo(Long value) {
+        public Criteria andMerchantForeignAmountEqualTo(BigDecimal value) {
             addCriterion("merchant_foreign_amount =", value, "merchantForeignAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantForeignAmountNotEqualTo(Long value) {
+        public Criteria andMerchantForeignAmountNotEqualTo(BigDecimal value) {
             addCriterion("merchant_foreign_amount <>", value, "merchantForeignAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantForeignAmountGreaterThan(Long value) {
+        public Criteria andMerchantForeignAmountGreaterThan(BigDecimal value) {
             addCriterion("merchant_foreign_amount >", value, "merchantForeignAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantForeignAmountGreaterThanOrEqualTo(Long value) {
+        public Criteria andMerchantForeignAmountGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("merchant_foreign_amount >=", value, "merchantForeignAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantForeignAmountLessThan(Long value) {
+        public Criteria andMerchantForeignAmountLessThan(BigDecimal value) {
             addCriterion("merchant_foreign_amount <", value, "merchantForeignAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantForeignAmountLessThanOrEqualTo(Long value) {
+        public Criteria andMerchantForeignAmountLessThanOrEqualTo(BigDecimal value) {
             addCriterion("merchant_foreign_amount <=", value, "merchantForeignAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantForeignAmountIn(List<Long> values) {
+        public Criteria andMerchantForeignAmountIn(List<BigDecimal> values) {
             addCriterion("merchant_foreign_amount in", values, "merchantForeignAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantForeignAmountNotIn(List<Long> values) {
+        public Criteria andMerchantForeignAmountNotIn(List<BigDecimal> values) {
             addCriterion("merchant_foreign_amount not in", values, "merchantForeignAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantForeignAmountBetween(Long value1, Long value2) {
+        public Criteria andMerchantForeignAmountBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("merchant_foreign_amount between", value1, value2, "merchantForeignAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantForeignAmountNotBetween(Long value1, Long value2) {
+        public Criteria andMerchantForeignAmountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("merchant_foreign_amount not between", value1, value2, "merchantForeignAmount");
             return (Criteria) this;
         }
@@ -716,52 +707,52 @@ public class MerchantTransactionEntityCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andMerchantCnyAmountEqualTo(Long value) {
+        public Criteria andMerchantCnyAmountEqualTo(BigDecimal value) {
             addCriterion("merchant_cny_amount =", value, "merchantCnyAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantCnyAmountNotEqualTo(Long value) {
+        public Criteria andMerchantCnyAmountNotEqualTo(BigDecimal value) {
             addCriterion("merchant_cny_amount <>", value, "merchantCnyAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantCnyAmountGreaterThan(Long value) {
+        public Criteria andMerchantCnyAmountGreaterThan(BigDecimal value) {
             addCriterion("merchant_cny_amount >", value, "merchantCnyAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantCnyAmountGreaterThanOrEqualTo(Long value) {
+        public Criteria andMerchantCnyAmountGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("merchant_cny_amount >=", value, "merchantCnyAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantCnyAmountLessThan(Long value) {
+        public Criteria andMerchantCnyAmountLessThan(BigDecimal value) {
             addCriterion("merchant_cny_amount <", value, "merchantCnyAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantCnyAmountLessThanOrEqualTo(Long value) {
+        public Criteria andMerchantCnyAmountLessThanOrEqualTo(BigDecimal value) {
             addCriterion("merchant_cny_amount <=", value, "merchantCnyAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantCnyAmountIn(List<Long> values) {
+        public Criteria andMerchantCnyAmountIn(List<BigDecimal> values) {
             addCriterion("merchant_cny_amount in", values, "merchantCnyAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantCnyAmountNotIn(List<Long> values) {
+        public Criteria andMerchantCnyAmountNotIn(List<BigDecimal> values) {
             addCriterion("merchant_cny_amount not in", values, "merchantCnyAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantCnyAmountBetween(Long value1, Long value2) {
+        public Criteria andMerchantCnyAmountBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("merchant_cny_amount between", value1, value2, "merchantCnyAmount");
             return (Criteria) this;
         }
 
-        public Criteria andMerchantCnyAmountNotBetween(Long value1, Long value2) {
+        public Criteria andMerchantCnyAmountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("merchant_cny_amount not between", value1, value2, "merchantCnyAmount");
             return (Criteria) this;
         }
@@ -963,6 +954,66 @@ public class MerchantTransactionEntityCriteria {
 
         public Criteria andPaymentTransStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("payment_trans_status not between", value1, value2, "paymentTransStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusIsNull() {
+            addCriterion("payment_service_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusIsNotNull() {
+            addCriterion("payment_service_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusEqualTo(Integer value) {
+            addCriterion("payment_service_status =", value, "paymentServiceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusNotEqualTo(Integer value) {
+            addCriterion("payment_service_status <>", value, "paymentServiceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusGreaterThan(Integer value) {
+            addCriterion("payment_service_status >", value, "paymentServiceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("payment_service_status >=", value, "paymentServiceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusLessThan(Integer value) {
+            addCriterion("payment_service_status <", value, "paymentServiceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("payment_service_status <=", value, "paymentServiceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusIn(List<Integer> values) {
+            addCriterion("payment_service_status in", values, "paymentServiceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusNotIn(List<Integer> values) {
+            addCriterion("payment_service_status not in", values, "paymentServiceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusBetween(Integer value1, Integer value2) {
+            addCriterion("payment_service_status between", value1, value2, "paymentServiceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentServiceStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("payment_service_status not between", value1, value2, "paymentServiceStatus");
             return (Criteria) this;
         }
 

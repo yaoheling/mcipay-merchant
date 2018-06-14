@@ -5,9 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="merchant_transaction_id" jdbcType="INTEGER" property="merchantTransactionId" />
     <result column="user_card_number" jdbcType="VARCHAR" property="userCardNumber" />
-    <result column="merchant_cny_amount" jdbcType="DECIMAL" property="merchantCnyAmount" />
     <result column="management_trans_amount" jdbcType="DECIMAL" property="managementTransAmount" />
-    <result column="management_service_charge" jdbcType="DECIMAL" property="managementServiceCharge" />
     <result column="trans_status" jdbcType="INTEGER" property="transStatus" />
     <result column="trans_query_count" jdbcType="INTEGER" property="transQueryCount" />
     <result column="trans_modify_time" jdbcType="TIMESTAMP" property="transModifyTime" />
@@ -71,8 +69,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, merchant_transaction_id, user_card_number, merchant_cny_amount, management_trans_amount, 
-    management_service_charge, trans_status, trans_query_count, trans_modify_time
+    id, merchant_transaction_id, user_card_number, management_trans_amount, trans_status, 
+    trans_query_count, trans_modify_time
   </sql>
   <select id="selectByExample" parameterType="com.mcipay.persistence.entity.PaymentJournalEntityCriteria" resultMap="BaseResultMap">
     select
@@ -110,12 +108,10 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.PaymentJournalEntity" useGeneratedKeys="true">
     insert into payment_journal (merchant_transaction_id, user_card_number, 
-      merchant_cny_amount, management_trans_amount, 
-      management_service_charge, trans_status, trans_query_count, 
+      management_trans_amount, trans_status, trans_query_count, 
       trans_modify_time)
     values (#{merchantTransactionId,jdbcType=INTEGER}, #{userCardNumber,jdbcType=VARCHAR}, 
-      #{merchantCnyAmount,jdbcType=DECIMAL}, #{managementTransAmount,jdbcType=DECIMAL}, 
-      #{managementServiceCharge,jdbcType=DECIMAL}, #{transStatus,jdbcType=INTEGER}, #{transQueryCount,jdbcType=INTEGER}, 
+      #{managementTransAmount,jdbcType=DECIMAL}, #{transStatus,jdbcType=INTEGER}, #{transQueryCount,jdbcType=INTEGER}, 
       #{transModifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.PaymentJournalEntity" useGeneratedKeys="true">
@@ -127,14 +123,8 @@
       <if test="userCardNumber != null">
         user_card_number,
       </if>
-      <if test="merchantCnyAmount != null">
-        merchant_cny_amount,
-      </if>
       <if test="managementTransAmount != null">
         management_trans_amount,
-      </if>
-      <if test="managementServiceCharge != null">
-        management_service_charge,
       </if>
       <if test="transStatus != null">
         trans_status,
@@ -153,14 +143,8 @@
       <if test="userCardNumber != null">
         #{userCardNumber,jdbcType=VARCHAR},
       </if>
-      <if test="merchantCnyAmount != null">
-        #{merchantCnyAmount,jdbcType=DECIMAL},
-      </if>
       <if test="managementTransAmount != null">
         #{managementTransAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="managementServiceCharge != null">
-        #{managementServiceCharge,jdbcType=DECIMAL},
       </if>
       <if test="transStatus != null">
         #{transStatus,jdbcType=INTEGER},
@@ -173,7 +157,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mcipay.persistence.entity.PaymentJournalEntityCriteria" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.mcipay.persistence.entity.PaymentJournalEntityCriteria" resultType="java.lang.Long">
     select count(*) from payment_journal
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -191,14 +175,8 @@
       <if test="record.userCardNumber != null">
         user_card_number = #{record.userCardNumber,jdbcType=VARCHAR},
       </if>
-      <if test="record.merchantCnyAmount != null">
-        merchant_cny_amount = #{record.merchantCnyAmount,jdbcType=DECIMAL},
-      </if>
       <if test="record.managementTransAmount != null">
         management_trans_amount = #{record.managementTransAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="record.managementServiceCharge != null">
-        management_service_charge = #{record.managementServiceCharge,jdbcType=DECIMAL},
       </if>
       <if test="record.transStatus != null">
         trans_status = #{record.transStatus,jdbcType=INTEGER},
@@ -219,9 +197,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       merchant_transaction_id = #{record.merchantTransactionId,jdbcType=INTEGER},
       user_card_number = #{record.userCardNumber,jdbcType=VARCHAR},
-      merchant_cny_amount = #{record.merchantCnyAmount,jdbcType=DECIMAL},
       management_trans_amount = #{record.managementTransAmount,jdbcType=DECIMAL},
-      management_service_charge = #{record.managementServiceCharge,jdbcType=DECIMAL},
       trans_status = #{record.transStatus,jdbcType=INTEGER},
       trans_query_count = #{record.transQueryCount,jdbcType=INTEGER},
       trans_modify_time = #{record.transModifyTime,jdbcType=TIMESTAMP}
@@ -238,14 +214,8 @@
       <if test="userCardNumber != null">
         user_card_number = #{userCardNumber,jdbcType=VARCHAR},
       </if>
-      <if test="merchantCnyAmount != null">
-        merchant_cny_amount = #{merchantCnyAmount,jdbcType=DECIMAL},
-      </if>
       <if test="managementTransAmount != null">
         management_trans_amount = #{managementTransAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="managementServiceCharge != null">
-        management_service_charge = #{managementServiceCharge,jdbcType=DECIMAL},
       </if>
       <if test="transStatus != null">
         trans_status = #{transStatus,jdbcType=INTEGER},
@@ -263,9 +233,7 @@
     update payment_journal
     set merchant_transaction_id = #{merchantTransactionId,jdbcType=INTEGER},
       user_card_number = #{userCardNumber,jdbcType=VARCHAR},
-      merchant_cny_amount = #{merchantCnyAmount,jdbcType=DECIMAL},
       management_trans_amount = #{managementTransAmount,jdbcType=DECIMAL},
-      management_service_charge = #{managementServiceCharge,jdbcType=DECIMAL},
       trans_status = #{transStatus,jdbcType=INTEGER},
       trans_query_count = #{transQueryCount,jdbcType=INTEGER},
       trans_modify_time = #{transModifyTime,jdbcType=TIMESTAMP}

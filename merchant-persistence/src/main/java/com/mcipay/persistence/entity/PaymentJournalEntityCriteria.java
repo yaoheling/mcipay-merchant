@@ -1,6 +1,7 @@
 package com.mcipay.persistence.entity;
 
 import com.mcipay.page.Page;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -306,66 +307,6 @@ public class PaymentJournalEntityCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andMerchantCnyAmountIsNull() {
-            addCriterion("merchant_cny_amount is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantCnyAmountIsNotNull() {
-            addCriterion("merchant_cny_amount is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantCnyAmountEqualTo(Long value) {
-            addCriterion("merchant_cny_amount =", value, "merchantCnyAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantCnyAmountNotEqualTo(Long value) {
-            addCriterion("merchant_cny_amount <>", value, "merchantCnyAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantCnyAmountGreaterThan(Long value) {
-            addCriterion("merchant_cny_amount >", value, "merchantCnyAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantCnyAmountGreaterThanOrEqualTo(Long value) {
-            addCriterion("merchant_cny_amount >=", value, "merchantCnyAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantCnyAmountLessThan(Long value) {
-            addCriterion("merchant_cny_amount <", value, "merchantCnyAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantCnyAmountLessThanOrEqualTo(Long value) {
-            addCriterion("merchant_cny_amount <=", value, "merchantCnyAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantCnyAmountIn(List<Long> values) {
-            addCriterion("merchant_cny_amount in", values, "merchantCnyAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantCnyAmountNotIn(List<Long> values) {
-            addCriterion("merchant_cny_amount not in", values, "merchantCnyAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantCnyAmountBetween(Long value1, Long value2) {
-            addCriterion("merchant_cny_amount between", value1, value2, "merchantCnyAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andMerchantCnyAmountNotBetween(Long value1, Long value2) {
-            addCriterion("merchant_cny_amount not between", value1, value2, "merchantCnyAmount");
-            return (Criteria) this;
-        }
-
         public Criteria andManagementTransAmountIsNull() {
             addCriterion("management_trans_amount is null");
             return (Criteria) this;
@@ -376,113 +317,53 @@ public class PaymentJournalEntityCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andManagementTransAmountEqualTo(Long value) {
+        public Criteria andManagementTransAmountEqualTo(BigDecimal value) {
             addCriterion("management_trans_amount =", value, "managementTransAmount");
             return (Criteria) this;
         }
 
-        public Criteria andManagementTransAmountNotEqualTo(Long value) {
+        public Criteria andManagementTransAmountNotEqualTo(BigDecimal value) {
             addCriterion("management_trans_amount <>", value, "managementTransAmount");
             return (Criteria) this;
         }
 
-        public Criteria andManagementTransAmountGreaterThan(Long value) {
+        public Criteria andManagementTransAmountGreaterThan(BigDecimal value) {
             addCriterion("management_trans_amount >", value, "managementTransAmount");
             return (Criteria) this;
         }
 
-        public Criteria andManagementTransAmountGreaterThanOrEqualTo(Long value) {
+        public Criteria andManagementTransAmountGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("management_trans_amount >=", value, "managementTransAmount");
             return (Criteria) this;
         }
 
-        public Criteria andManagementTransAmountLessThan(Long value) {
+        public Criteria andManagementTransAmountLessThan(BigDecimal value) {
             addCriterion("management_trans_amount <", value, "managementTransAmount");
             return (Criteria) this;
         }
 
-        public Criteria andManagementTransAmountLessThanOrEqualTo(Long value) {
+        public Criteria andManagementTransAmountLessThanOrEqualTo(BigDecimal value) {
             addCriterion("management_trans_amount <=", value, "managementTransAmount");
             return (Criteria) this;
         }
 
-        public Criteria andManagementTransAmountIn(List<Long> values) {
+        public Criteria andManagementTransAmountIn(List<BigDecimal> values) {
             addCriterion("management_trans_amount in", values, "managementTransAmount");
             return (Criteria) this;
         }
 
-        public Criteria andManagementTransAmountNotIn(List<Long> values) {
+        public Criteria andManagementTransAmountNotIn(List<BigDecimal> values) {
             addCriterion("management_trans_amount not in", values, "managementTransAmount");
             return (Criteria) this;
         }
 
-        public Criteria andManagementTransAmountBetween(Long value1, Long value2) {
+        public Criteria andManagementTransAmountBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("management_trans_amount between", value1, value2, "managementTransAmount");
             return (Criteria) this;
         }
 
-        public Criteria andManagementTransAmountNotBetween(Long value1, Long value2) {
+        public Criteria andManagementTransAmountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("management_trans_amount not between", value1, value2, "managementTransAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeIsNull() {
-            addCriterion("management_service_charge is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeIsNotNull() {
-            addCriterion("management_service_charge is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeEqualTo(Long value) {
-            addCriterion("management_service_charge =", value, "managementServiceCharge");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeNotEqualTo(Long value) {
-            addCriterion("management_service_charge <>", value, "managementServiceCharge");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeGreaterThan(Long value) {
-            addCriterion("management_service_charge >", value, "managementServiceCharge");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeGreaterThanOrEqualTo(Long value) {
-            addCriterion("management_service_charge >=", value, "managementServiceCharge");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeLessThan(Long value) {
-            addCriterion("management_service_charge <", value, "managementServiceCharge");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeLessThanOrEqualTo(Long value) {
-            addCriterion("management_service_charge <=", value, "managementServiceCharge");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeIn(List<Long> values) {
-            addCriterion("management_service_charge in", values, "managementServiceCharge");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeNotIn(List<Long> values) {
-            addCriterion("management_service_charge not in", values, "managementServiceCharge");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeBetween(Long value1, Long value2) {
-            addCriterion("management_service_charge between", value1, value2, "managementServiceCharge");
-            return (Criteria) this;
-        }
-
-        public Criteria andManagementServiceChargeNotBetween(Long value1, Long value2) {
-            addCriterion("management_service_charge not between", value1, value2, "managementServiceCharge");
             return (Criteria) this;
         }
 
