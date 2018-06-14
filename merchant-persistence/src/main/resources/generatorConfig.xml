@@ -41,11 +41,11 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <!--<table tableName="merchant_transaction" domainObjectName="MerchantTransactionEntity" enableCountByExample="true"
+        <table tableName="merchant_transaction" domainObjectName="MerchantTransactionEntity" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
             <property name="useActualColumnNames" value="false" />
             <generatedKey column="id" sqlStatement="JDBC" identity="true" />
-        </table>-->
+        </table>
 
         <!--<table tableName="payment_journal" domainObjectName="PaymentJournalEntity" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
@@ -71,11 +71,11 @@
             <generatedKey column="id" sqlStatement="JDBC" identity="true" />
         </table>-->
 
-        <table tableName="merchant_info" domainObjectName="MerchantInfoEntity" enableCountByExample="true"
+        <!--<table tableName="merchant_info" domainObjectName="MerchantInfoEntity" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
             <property name="useActualColumnNames" value="false" />
             <generatedKey column="id" sqlStatement="JDBC" identity="true" />
-        </table>
+        </table>-->
 
         <!--<table tableName="merchant_bank_info" domainObjectName="MerchantBankInfoEntity" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
@@ -83,11 +83,17 @@
             <generatedKey column="id" sqlStatement="JDBC" identity="true" />
         </table>-->
 
-        <table tableName="email_black_list" domainObjectName="EmailBlackList" enableCountByExample="true"
+        <!--<table tableName="email_black_list" domainObjectName="EmailBlackList" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
             <property name="useActualColumnNames" value="false" />
             <generatedKey column="id" sqlStatement="JDBC" identity="true" />
-        </table>
+        </table>-->
+
+        <!--<table tableName="merchant_account" domainObjectName="MerchantAccountEntity" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
+            <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="JDBC" identity="true" />
+        </table>-->
 
     </context>
 </generatorConfiguration>

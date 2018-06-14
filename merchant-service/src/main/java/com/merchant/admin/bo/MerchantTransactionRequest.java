@@ -1,20 +1,28 @@
-package com.mcipay.persistence.entity;
+package com.merchant.admin.bo;
 
+import com.merchant.util.PaymentServiceStatus;
+import com.merchant.util.PaymentStatus;
+import com.merchant.util.SettlementStatus;
+import com.merchant.util.WaybillStatus;
+
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class MerchantTransactionEntity {
-    private Integer id;
+public class MerchantTransactionRequest {
 
+    @NotNull(message = "商户ID 不能为空")
     private Integer merchantId;
 
+    @NotNull(message = "流水号 不能为空")
     private String merchantSerialNo;
 
+    @NotNull(message = "订单号 不能为空")
     private String merchantOrderNo;
 
     private Date merchantCreateTime;
 
-    private Date managementTransTime;
+    private Date managementTransTime = new Date();
 
     private String merchantCurrency;
 
@@ -22,27 +30,23 @@ public class MerchantTransactionEntity {
 
     private BigDecimal merchantForeignAmount;
 
+    @NotNull(message = "支付人民币金额 不能为空")
     private BigDecimal merchantCnyAmount;
 
     private String userEmail;
 
     private String userTransUrl;
 
-    private Integer paymentTransStatus;
+    private Integer paymentTransStatus = PaymentStatus.INIT.getStatus();
 
-    private Integer paymentServiceStatus;
+    private Integer paymentServiceStatus = PaymentServiceStatus.INIT.getStatus();
 
-    private Integer settlementStatus;
+    private Integer settlementStatus = SettlementStatus.INIT.getStatus();
 
-    private Integer waybillStatus;
+    private Integer waybillStatus = WaybillStatus.INIT.getStatus();
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    //TODO 外币卡境内代扣所需要素
+    private String userCardNumber;
 
     public Integer getMerchantId() {
         return merchantId;
@@ -57,7 +61,7 @@ public class MerchantTransactionEntity {
     }
 
     public void setMerchantSerialNo(String merchantSerialNo) {
-        this.merchantSerialNo = merchantSerialNo == null ? null : merchantSerialNo.trim();
+        this.merchantSerialNo = merchantSerialNo;
     }
 
     public String getMerchantOrderNo() {
@@ -65,7 +69,7 @@ public class MerchantTransactionEntity {
     }
 
     public void setMerchantOrderNo(String merchantOrderNo) {
-        this.merchantOrderNo = merchantOrderNo == null ? null : merchantOrderNo.trim();
+        this.merchantOrderNo = merchantOrderNo;
     }
 
     public Date getMerchantCreateTime() {
@@ -89,7 +93,7 @@ public class MerchantTransactionEntity {
     }
 
     public void setMerchantCurrency(String merchantCurrency) {
-        this.merchantCurrency = merchantCurrency == null ? null : merchantCurrency.trim();
+        this.merchantCurrency = merchantCurrency;
     }
 
     public String getMerchantCardType() {
@@ -97,7 +101,7 @@ public class MerchantTransactionEntity {
     }
 
     public void setMerchantCardType(String merchantCardType) {
-        this.merchantCardType = merchantCardType == null ? null : merchantCardType.trim();
+        this.merchantCardType = merchantCardType;
     }
 
     public BigDecimal getMerchantForeignAmount() {
@@ -121,7 +125,7 @@ public class MerchantTransactionEntity {
     }
 
     public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail == null ? null : userEmail.trim();
+        this.userEmail = userEmail;
     }
 
     public String getUserTransUrl() {
@@ -129,7 +133,7 @@ public class MerchantTransactionEntity {
     }
 
     public void setUserTransUrl(String userTransUrl) {
-        this.userTransUrl = userTransUrl == null ? null : userTransUrl.trim();
+        this.userTransUrl = userTransUrl;
     }
 
     public Integer getPaymentTransStatus() {
@@ -162,5 +166,13 @@ public class MerchantTransactionEntity {
 
     public void setWaybillStatus(Integer waybillStatus) {
         this.waybillStatus = waybillStatus;
+    }
+
+    public String getUserCardNumber() {
+        return userCardNumber;
+    }
+
+    public void setUserCardNumber(String userCardNumber) {
+        this.userCardNumber = userCardNumber;
     }
 }

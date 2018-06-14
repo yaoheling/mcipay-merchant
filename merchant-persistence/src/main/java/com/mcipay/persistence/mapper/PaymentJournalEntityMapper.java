@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PaymentJournalEntityMapper {
-    int countByExample(PaymentJournalEntityCriteria example);
+    long countByExample(PaymentJournalEntityCriteria example);
 
     int deleteByExample(PaymentJournalEntityCriteria example);
 

@@ -3,7 +3,7 @@
 <mapper namespace="com.mcipay.persistence.mapper.MerchantTransactionEntityMapper">
   <resultMap id="BaseResultMap" type="com.mcipay.persistence.entity.MerchantTransactionEntity">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="merchant_id" jdbcType="VARCHAR" property="merchantId" />
+    <result column="merchant_id" jdbcType="INTEGER" property="merchantId" />
     <result column="merchant_serial_no" jdbcType="VARCHAR" property="merchantSerialNo" />
     <result column="merchant_order_no" jdbcType="VARCHAR" property="merchantOrderNo" />
     <result column="merchant_create_time" jdbcType="TIMESTAMP" property="merchantCreateTime" />
@@ -15,6 +15,7 @@
     <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
     <result column="user_trans_url" jdbcType="VARCHAR" property="userTransUrl" />
     <result column="payment_trans_status" jdbcType="INTEGER" property="paymentTransStatus" />
+    <result column="payment_service_status" jdbcType="INTEGER" property="paymentServiceStatus" />
     <result column="settlement_status" jdbcType="INTEGER" property="settlementStatus" />
     <result column="waybill_status" jdbcType="INTEGER" property="waybillStatus" />
   </resultMap>
@@ -79,7 +80,8 @@
   <sql id="Base_Column_List">
     id, merchant_id, merchant_serial_no, merchant_order_no, merchant_create_time, management_trans_time, 
     merchant_currency, merchant_card_type, merchant_foreign_amount, merchant_cny_amount, 
-    user_email, user_trans_url, payment_trans_status, settlement_status, waybill_status
+    user_email, user_trans_url, payment_trans_status, payment_service_status, settlement_status, 
+    waybill_status
   </sql>
   <select id="selectByExample" parameterType="com.mcipay.persistence.entity.MerchantTransactionEntityCriteria" resultMap="BaseResultMap">
     select
@@ -120,14 +122,14 @@
       merchant_create_time, management_trans_time, 
       merchant_currency, merchant_card_type, merchant_foreign_amount, 
       merchant_cny_amount, user_email, user_trans_url, 
-      payment_trans_status, settlement_status, waybill_status
-      )
-    values (#{merchantId,jdbcType=VARCHAR}, #{merchantSerialNo,jdbcType=VARCHAR}, #{merchantOrderNo,jdbcType=VARCHAR}, 
+      payment_trans_status, payment_service_status, 
+      settlement_status, waybill_status)
+    values (#{merchantId,jdbcType=INTEGER}, #{merchantSerialNo,jdbcType=VARCHAR}, #{merchantOrderNo,jdbcType=VARCHAR}, 
       #{merchantCreateTime,jdbcType=TIMESTAMP}, #{managementTransTime,jdbcType=TIMESTAMP}, 
       #{merchantCurrency,jdbcType=VARCHAR}, #{merchantCardType,jdbcType=VARCHAR}, #{merchantForeignAmount,jdbcType=DECIMAL}, 
       #{merchantCnyAmount,jdbcType=DECIMAL}, #{userEmail,jdbcType=VARCHAR}, #{userTransUrl,jdbcType=VARCHAR}, 
-      #{paymentTransStatus,jdbcType=INTEGER}, #{settlementStatus,jdbcType=INTEGER}, #{waybillStatus,jdbcType=INTEGER}
-      )
+      #{paymentTransStatus,jdbcType=INTEGER}, #{paymentServiceStatus,jdbcType=INTEGER}, 
+      #{settlementStatus,jdbcType=INTEGER}, #{waybillStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.MerchantTransactionEntity" useGeneratedKeys="true">
     insert into merchant_transaction
@@ -168,6 +170,9 @@
       <if test="paymentTransStatus != null">
         payment_trans_status,
       </if>
+      <if test="paymentServiceStatus != null">
+        payment_service_status,
+      </if>
       <if test="settlementStatus != null">
         settlement_status,
       </if>
@@ -177,7 +182,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="merchantId != null">
-        #{merchantId,jdbcType=VARCHAR},
+        #{merchantId,jdbcType=INTEGER},
       </if>
       <if test="merchantSerialNo != null">
         #{merchantSerialNo,jdbcType=VARCHAR},
@@ -212,6 +217,9 @@
       <if test="paymentTransStatus != null">
         #{paymentTransStatus,jdbcType=INTEGER},
       </if>
+      <if test="paymentServiceStatus != null">
+        #{paymentServiceStatus,jdbcType=INTEGER},
+      </if>
       <if test="settlementStatus != null">
         #{settlementStatus,jdbcType=INTEGER},
       </if>
@@ -220,7 +228,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mcipay.persistence.entity.MerchantTransactionEntityCriteria" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.mcipay.persistence.entity.MerchantTransactionEntityCriteria" resultType="java.lang.Long">
     select count(*) from merchant_transaction
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -233,7 +241,7 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.merchantId != null">
-        merchant_id = #{record.merchantId,jdbcType=VARCHAR},
+        merchant_id = #{record.merchantId,jdbcType=INTEGER},
       </if>
       <if test="record.merchantSerialNo != null">
         merchant_serial_no = #{record.merchantSerialNo,jdbcType=VARCHAR},
@@ -268,6 +276,9 @@
       <if test="record.paymentTransStatus != null">
         payment_trans_status = #{record.paymentTransStatus,jdbcType=INTEGER},
       </if>
+      <if test="record.paymentServiceStatus != null">
+        payment_service_status = #{record.paymentServiceStatus,jdbcType=INTEGER},
+      </if>
       <if test="record.settlementStatus != null">
         settlement_status = #{record.settlementStatus,jdbcType=INTEGER},
       </if>
@@ -282,7 +293,7 @@
   <update id="updateByExample" parameterType="map">
     update merchant_transaction
     set id = #{record.id,jdbcType=INTEGER},
-      merchant_id = #{record.merchantId,jdbcType=VARCHAR},
+      merchant_id = #{record.merchantId,jdbcType=INTEGER},
       merchant_serial_no = #{record.merchantSerialNo,jdbcType=VARCHAR},
       merchant_order_no = #{record.merchantOrderNo,jdbcType=VARCHAR},
       merchant_create_time = #{record.merchantCreateTime,jdbcType=TIMESTAMP},
@@ -294,6 +305,7 @@
       user_email = #{record.userEmail,jdbcType=VARCHAR},
       user_trans_url = #{record.userTransUrl,jdbcType=VARCHAR},
       payment_trans_status = #{record.paymentTransStatus,jdbcType=INTEGER},
+      payment_service_status = #{record.paymentServiceStatus,jdbcType=INTEGER},
       settlement_status = #{record.settlementStatus,jdbcType=INTEGER},
       waybill_status = #{record.waybillStatus,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -304,7 +316,7 @@
     update merchant_transaction
     <set>
       <if test="merchantId != null">
-        merchant_id = #{merchantId,jdbcType=VARCHAR},
+        merchant_id = #{merchantId,jdbcType=INTEGER},
       </if>
       <if test="merchantSerialNo != null">
         merchant_serial_no = #{merchantSerialNo,jdbcType=VARCHAR},
@@ -339,6 +351,9 @@
       <if test="paymentTransStatus != null">
         payment_trans_status = #{paymentTransStatus,jdbcType=INTEGER},
       </if>
+      <if test="paymentServiceStatus != null">
+        payment_service_status = #{paymentServiceStatus,jdbcType=INTEGER},
+      </if>
       <if test="settlementStatus != null">
         settlement_status = #{settlementStatus,jdbcType=INTEGER},
       </if>
@@ -350,7 +365,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mcipay.persistence.entity.MerchantTransactionEntity">
     update merchant_transaction
-    set merchant_id = #{merchantId,jdbcType=VARCHAR},
+    set merchant_id = #{merchantId,jdbcType=INTEGER},
       merchant_serial_no = #{merchantSerialNo,jdbcType=VARCHAR},
       merchant_order_no = #{merchantOrderNo,jdbcType=VARCHAR},
       merchant_create_time = #{merchantCreateTime,jdbcType=TIMESTAMP},
@@ -362,6 +377,7 @@
       user_email = #{userEmail,jdbcType=VARCHAR},
       user_trans_url = #{userTransUrl,jdbcType=VARCHAR},
       payment_trans_status = #{paymentTransStatus,jdbcType=INTEGER},
+      payment_service_status = #{paymentServiceStatus,jdbcType=INTEGER},
       settlement_status = #{settlementStatus,jdbcType=INTEGER},
       waybill_status = #{waybillStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
