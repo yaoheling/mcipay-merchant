@@ -20,6 +20,7 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 
         <collection property="merchantBankInfoEntityList" ofType="com.mcipay.persistence.entity.MerchantBankInfoEntity" >
+            <result column="bid" jdbcType="INTEGER" property="id" />
             <result column="merchant_id" jdbcType="INTEGER" property="merchantId" />
             <result column="name" jdbcType="VARCHAR" property="name" />
             <result column="id_card_no" jdbcType="VARCHAR" property="idCardNo" />
@@ -39,16 +40,16 @@
                         <foreach collection="criteria.criteria" item="criterion">
                             <choose>
                                 <when test="criterion.noValue">
-                                    and ${criterion.condition}
+                                    and m.${criterion.condition}
                                 </when>
                                 <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
+                                    and m.${criterion.condition} #{criterion.value}
                                 </when>
                                 <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                    and m.${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                                 </when>
                                 <when test="criterion.listValue">
-                                    and ${criterion.condition}
+                                    and m.${criterion.condition}
                                     <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                                         #{listItem}
                                     </foreach>
@@ -62,10 +63,13 @@
     </sql>
 
     <select id="selectByExample" parameterType="com.mcipay.persistence.entity.MerchantInfoEntityCriteria" resultMap="BaseResultMap">
-        SELECT * FROM merchant_info m, merchant_bank_info b
-        WHERE m.id = b.merchant_id
+        SELECT m.*, b.*, b.id bid FROM merchant_info m, merchant_bank_info b
         <if test="_parameter != null">
             <include refid="Example_Where_Clause" />
+            and m.id = b.merchant_id
+        </if>
+        <if test="_parameter == null">
+            where m.id = b.merchant_id
         </if>
         <if test="orderByClause != null">
             order by ${orderByClause}

@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 @Api(value = "商户管理接口", description="商户管理服务API根目录")
@@ -32,14 +33,35 @@ public class MerchantManageController {
         return response;
     }
 
-    @ApiOperation("查询商户信息")
+    @ApiOperation("查询单个商户信息")
     @ApiImplicitParams({
-        @ApiImplicitParam(name = "pageNo", value = "页码", required = true),
-        @ApiImplicitParam(name = "pageSize", value = "每页数量", required = true)
+        @ApiImplicitParam(name = "merchantId", value = "商户ID", required = true)
     })
     @GetMapping(value = "/getMerchantInfo")
     @ResponseBody
     public BaseResponse getMerchantInfo(QueryMerchantRequest request) {
+        BaseResponse response = merchantManageService.queryMerchantList(request);
+        if(response.isSuccess() && response.getData() != null) {
+            QueryResponse queryResponse = (QueryResponse) response.getData();
+            if(CollectionUtils.isEmpty(queryResponse.getRows())) {
+                response.error();
+                response.setData(null);
+                response.setMessage("商户信息不存在");
+            } else {
+                response.setData(queryResponse.getRows().iterator().next());
+            }
+        }
+        return response;
+    }
+
+    @ApiOperation("分页查询商户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNo", value = "页码", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "每页数量", required = true)
+    })
+    @GetMapping(value = "/pageMerchantInfo")
+    @ResponseBody
+    public BaseResponse pageMerchantInfo(QueryMerchantRequest request) {
         BaseResponse response = merchantManageService.queryMerchantList(request);
         return response;
     }
