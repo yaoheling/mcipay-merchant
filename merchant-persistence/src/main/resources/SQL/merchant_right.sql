@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : utf-8
 
- Date: 06/14/2018 20:52:55 PM
+ Date: 06/15/2018 21:04:52 PM
 */
 
 SET NAMES utf8mb4;
@@ -59,6 +59,7 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL COMMENT '角色名称',
+  `user_id` int(11) NOT NULL COMMENT '所属用户ID',
   `status` int(1) DEFAULT NULL COMMENT '1：启用，2：禁用，3：删除',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`),
@@ -101,6 +102,7 @@ CREATE TABLE `users` (
   `phone` varchar(16) DEFAULT NULL COMMENT '手机号码',
   `status` int(1) DEFAULT NULL COMMENT '1：启用，2：禁用，3：删除',
   `parent_id` int(11) NOT NULL COMMENT '子账户的父级账户id；-1：主账户；',
+  `type` int(1) NOT NULL COMMENT '用户类型，1：管理员；2：商户',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `login_ip` varchar(32) DEFAULT NULL COMMENT '登录IP',
   `login_address` varchar(256) DEFAULT NULL COMMENT '登录所在地',

@@ -45,7 +45,7 @@ public class UserService {
     }
 
     @Transactional
-    public int save(User user, String roleIds) {
+    public int save(User user, List<Integer> roleIdList) {
         if (user == null) {
             throw new BusinessException("用户信息不能为空");
         }
@@ -54,9 +54,6 @@ public class UserService {
         }
         if (StringUtils.isBlank(user.getPassword())) {
             throw new BusinessException("密码不能为空");
-        }
-        if (user.getParentId() == null) {
-            throw new BusinessException("主账户不能为空");
         }
         user.setPassword(MD5.MD5(user.getPassword()));
         if (StringUtils.isBlank(user.getName())) {
