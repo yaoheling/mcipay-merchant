@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.mcipay.persistence.entity.Role">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, status, create_time
+    id, name, user_id, status, create_time
   </sql>
   <select id="selectByExample" parameterType="com.mcipay.persistence.entity.RoleCriteria" resultMap="BaseResultMap">
     select
@@ -103,16 +104,19 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.Role" useGeneratedKeys="true">
-    insert into role (name, status, create_time
-      )
-    values (#{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
-      )
+    insert into role (name, user_id, status, 
+      create_time)
+    values (#{name,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.Role" useGeneratedKeys="true">
     insert into role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         name,
+      </if>
+      <if test="userId != null">
+        user_id,
       </if>
       <if test="status != null">
         status,
@@ -124,6 +128,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -148,6 +155,9 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
@@ -163,6 +173,7 @@
     update role
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -174,6 +185,9 @@
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
@@ -187,6 +201,7 @@
   <update id="updateByPrimaryKey" parameterType="com.mcipay.persistence.entity.Role">
     update role
     set name = #{name,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
