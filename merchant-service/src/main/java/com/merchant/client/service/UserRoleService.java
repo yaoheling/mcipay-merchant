@@ -7,6 +7,7 @@ import com.mcipay.persistence.mapper.UserRoleMapper;
 import com.merchant.exception.BusinessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,6 +22,26 @@ public class UserRoleService {
     @Resource
     private UserRoleMapper userRoleMapper;
 
+    public void insertBatch(Integer userId, List<Integer> roleIdList) {
+        if (userId == null) {
+            throw new BusinessException("账户ID不能为空");
+        }
+        if (CollectionUtils.isEmpty(roleIdList)) {
+            return;
+        }
+        UserRole userRole = null;
+        for (Integer roleId : roleIdList) {
+            if (roleId == null) {
+                continue;
+            }
+            userRole = new UserRole();
+            userRole.setUserId(userId);
+            userRole.setRoleId(roleId);
+            save(userRole);
+        }
+        return ;
+    }
+
     public int save(UserRole userRole) {
         if (userRole == null) {
             throw new BusinessException("关系不能为空");
@@ -32,6 +53,13 @@ public class UserRoleService {
             throw new BusinessException("角色ID不能为空");
         }
         return userRoleMapper.insert(userRole);
+    }
+
+    @Transactional
+    public int delete(Integer userId) {
+        UserRole userRole = new UserRole();
+        userRole.setUserId(userId);
+        return delete(userRole);
     }
 
     @Transactional
