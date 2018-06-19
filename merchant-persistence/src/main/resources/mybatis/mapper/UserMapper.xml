@@ -10,6 +10,7 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
     <result column="login_address" jdbcType="VARCHAR" property="loginAddress" />
@@ -75,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, name, email, phone, status, parent_id, create_time, login_ip, 
-    login_address, login_time, last_login_time
+    id, username, password, name, email, phone, status, parent_id, type, create_time, 
+    login_ip, login_address, login_time, last_login_time
   </sql>
   <select id="selectByExample" parameterType="com.mcipay.persistence.entity.UserCriteria" resultMap="BaseResultMap">
     select
@@ -115,14 +116,14 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.User" useGeneratedKeys="true">
     insert into users (username, password, name, 
       email, phone, status, 
-      parent_id, create_time, login_ip, 
-      login_address, login_time, last_login_time
-      )
+      parent_id, type, create_time, 
+      login_ip, login_address, login_time, 
+      last_login_time)
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{parentId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{loginIp,jdbcType=VARCHAR}, 
-      #{loginAddress,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}
-      )
+      #{parentId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{loginIp,jdbcType=VARCHAR}, #{loginAddress,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.User" useGeneratedKeys="true">
     insert into users
@@ -147,6 +148,9 @@
       </if>
       <if test="parentId != null">
         parent_id,
+      </if>
+      <if test="type != null">
+        type,
       </if>
       <if test="createTime != null">
         create_time,
@@ -185,6 +189,9 @@
       </if>
       <if test="parentId != null">
         #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -236,6 +243,9 @@
       <if test="record.parentId != null">
         parent_id = #{record.parentId,jdbcType=INTEGER},
       </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -266,6 +276,7 @@
       phone = #{record.phone,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
       parent_id = #{record.parentId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       login_ip = #{record.loginIp,jdbcType=VARCHAR},
       login_address = #{record.loginAddress,jdbcType=VARCHAR},
@@ -299,6 +310,9 @@
       <if test="parentId != null">
         parent_id = #{parentId,jdbcType=INTEGER},
       </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -326,6 +340,7 @@
       phone = #{phone,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       login_ip = #{loginIp,jdbcType=VARCHAR},
       login_address = #{loginAddress,jdbcType=VARCHAR},

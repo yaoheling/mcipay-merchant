@@ -19,6 +19,8 @@ public class User {
 
     private Integer parentId;
 
+    private Integer type;
+
     private Date createTime;
 
     private String loginIp;
@@ -91,6 +93,14 @@ public class User {
 
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Date getCreateTime() {
