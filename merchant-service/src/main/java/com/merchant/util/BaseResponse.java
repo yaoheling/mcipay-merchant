@@ -1,5 +1,7 @@
 package com.merchant.util;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class BaseResponse {
 
     private ResponseCode code = ResponseCode.ERROR;

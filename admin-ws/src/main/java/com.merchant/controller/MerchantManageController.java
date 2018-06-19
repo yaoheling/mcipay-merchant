@@ -1,5 +1,6 @@
 package com.merchant.controller;
 
+import com.merchant.admin.bo.GetMerchantUrlRequest;
 import com.merchant.admin.bo.QueryMerchantRequest;
 import com.merchant.admin.bo.SaveMerchantInfo;
 import com.merchant.admin.service.MerchantManageService;
@@ -85,6 +86,18 @@ public class MerchantManageController {
     public BaseResponse updateMerchantInfo(@RequestBody SaveMerchantInfo updateMerchantInfo) {
         BaseResponse response = merchantManageService.updateMerchant(updateMerchantInfo.getMerchantInfo(),
                 updateMerchantInfo.getMerchantBankInfoEntityList());
+        return response;
+    }
+
+    @ApiOperation("分页查询商户Url信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNo", value = "页码", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "每页数量", required = true)
+    })
+    @GetMapping(value = "/pageMerchantUrl")
+    @ResponseBody
+    public BaseResponse pageMerchantUrl(GetMerchantUrlRequest request) {
+        BaseResponse response = merchantManageService.getMerchantUrl(request);
         return response;
     }
 

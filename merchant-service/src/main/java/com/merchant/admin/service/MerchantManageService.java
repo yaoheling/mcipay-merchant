@@ -1,17 +1,17 @@
 package com.merchant.admin.service;
 
 import com.mcipay.page.Page;
-import com.mcipay.persistence.entity.MerchantBankInfoEntity;
-import com.mcipay.persistence.entity.MerchantBankInfoEntityCriteria;
-import com.mcipay.persistence.entity.MerchantInfoEntity;
-import com.mcipay.persistence.entity.MerchantInfoEntityCriteria;
+import com.mcipay.persistence.entity.*;
 import com.mcipay.persistence.entity.manual.CompleteMerchantInfoEntity;
 import com.mcipay.persistence.mapper.CompleteMerchantInfoEntityMapper;
 import com.mcipay.persistence.mapper.MerchantBankInfoEntityMapper;
 import com.mcipay.persistence.mapper.MerchantInfoEntityMapper;
+import com.mcipay.persistence.mapper.MerchantUrlEntityMapper;
+import com.merchant.admin.bo.GetMerchantUrlRequest;
 import com.merchant.admin.bo.QueryMerchantRequest;
 import com.merchant.admin.bo.SaveMerchantInfo;
 import com.merchant.util.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -31,6 +31,9 @@ public class MerchantManageService {
 
     @Resource(name = "completeMerchantInfoEntityMapper")
     private CompleteMerchantInfoEntityMapper completeMerchantInfoMapper;
+
+    @Resource(name = "merchantUrlEntityMapper")
+    private MerchantUrlEntityMapper merchantUrlMapper;
 
     /**
      * 保存商户信息
@@ -138,6 +141,31 @@ public class MerchantManageService {
         for (SaveMerchantInfo saveMerchantInfo : saveMerchantInfoList) {
             saveMerchantInfo(saveMerchantInfo.getMerchantInfo(), saveMerchantInfo.getMerchantBankInfoEntityList());
         }
+    }
+
+    /**
+     * 商户URL列表获取
+     */
+    public BaseResponse getMerchantUrl(GetMerchantUrlRequest request) {
+        MerchantUrlEntityCriteria condition = new MerchantUrlEntityCriteria();
+        MerchantUrlEntityCriteria.Criteria criteria = condition.createCriteria();
+        if(request.getMerchantId() != null) {
+            criteria.andMerchantIdEqualTo(request.getMerchantId());
+        }
+        if(request.getPageNo() != null && request.getPageSize() != null) {
+            Page page = new Page(request.getSqlStart(), request.getPageSize());
+            condition.setPage(page);
+        }
+        List<MerchantUrlEntity> result = merchantUrlMapper.selectByExample(condition);
+        long count = merchantUrlMapper.countByExample(condition);
+
+        QueryResponse queryResponse = new QueryResponse();
+        queryResponse.setRows(result);
+        queryResponse.setTotalCount((int) count);
+
+        BaseResponse response = new BaseResponse(ResponseCode.SUCCESS);
+        response.setData(queryResponse);
+        return response;
     }
 
 }
