@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +25,9 @@ public class UserService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private UserRoleService userRoleService;
 
     @Resource
     private UserRoleMapper userRoleMapper;
@@ -62,26 +64,36 @@ public class UserService {
         if (user.getStatus() == null) {
             user.setStatus(1);
         }
+        user.setType(2);
         user.setCreateTime(new Date());
-        return userMapper.insert(user);
+        //保存用户
+        userMapper.insert(user);
+        //保存用户和角色关系
+        userRoleService.insertBatch(user.getId(), roleIdList);
+        return 1;
     }
 
     @Transactional
-    public int update(User user, String roleIds) {
+    public int update(User user, List<Integer> roleIdList) {
         if (user == null) {
             throw new BusinessException("用户信息不能为空");
         }
-        if (user.getParentId() == null) {
-            throw new BusinessException("主账户不能为空");
+        if (user.getId() == null) {
+            throw new BusinessException("账户ID不能为空");
         }
         if (StringUtils.isNotBlank(user.getPassword())) {
             user.setPassword(MD5.MD5(user.getPassword()));
         }
-        if (user.getStatus() == null) {
-            user.setStatus(1);
+        //更新用户信息
+        userMapper.updateByPrimaryKeySelective(user);
+        if (CollectionUtils.isEmpty(roleIdList)) {
+            return 1;
         }
-        //todo 更新权限信息
-        return userMapper.updateByPrimaryKeySelective(user);
+        //先删除原有角色关系
+        userRoleService.delete(user.getId());
+        //保存用户和角色关系
+        userRoleService.insertBatch(user.getId(), roleIdList);
+        return 1;
     }
 
     @Transactional
@@ -89,25 +101,21 @@ public class UserService {
         if (id == null) {
             throw new BusinessException("ID不能为空");
         }
-        //删除用户角色关系
-
-        return userMapper.deleteByPrimaryKey(id);
+        //先删除原有角色关系
+        userRoleService.delete(id);
+        //删除用户信息,逻辑删除
+        User user = new User();
+        user.setId(id);
+        user.setStatus(3);
+        return update(user, null);
     }
 
-    public void deleteBatch(String ids) {
-        if (StringUtils.isBlank(ids)) {
-            throw new BusinessException("ID不能为空");
+    public void deleteBatch(List<Integer> userIdList) {
+        if (CollectionUtils.isEmpty(userIdList)) {
+            throw new BusinessException("用户ID不能为空");
         }
-        String[] idArr = ids.split(",");
-        if (idArr == null || idArr.length == 0) {
-            throw new BusinessException("ID不能为空");
-        }
-        List<Integer> lists = new ArrayList<Integer>();
-        for (int i = 0; i < idArr.length; i++) {
-            if (StringUtils.isBlank(idArr[i])) {
-                continue;
-            }
-            delete(Integer.parseInt(idArr[i]));
+        for (Integer userid : userIdList) {
+            delete(userid);
         }
     }
 
