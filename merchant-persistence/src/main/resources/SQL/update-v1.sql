@@ -70,7 +70,7 @@ CREATE TABLE `payment_journal` (
   `trans_modify_time` datetime DEFAULT NULL COMMENT '三方交易状态修改时间',
   PRIMARY KEY (`id`),
   KEY `transaction_id_index` (`merchant_transaction_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8 COMMENT='交易流水表，实际发送到三方的请求';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='交易流水表，实际发送到三方的请求';
 
 --  2018-05-31 start
 CREATE TABLE `merchant_info` (
@@ -119,3 +119,16 @@ CREATE TABLE `merchant_account` (
   KEY `transaction_id_index` (`merchant_transaction_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8 COMMENT='商户账目表';
 -- 2018-06-12 END   **************************************************************************
+
+CREATE TABLE `merchant_url` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `merchant_id` int(11) NOT NULL COMMENT '商户ID',
+  `url` varchar(255) DEFAULT NULL COMMENT '商户待审核URL',
+  `status` int(11) DEFAULT NULL COMMENT '状态 0：提交待审核(默认)；1：审核通过；2：驳回',
+  `create_time` datetime DEFAULT NULL COMMENT '商户提交时间',
+  `auditor_id` int(11) DEFAULT NULL COMMENT '审核人ID',
+  `auditor_time` datetime DEFAULT NULL COMMENT '审核时间',
+  `audit_opinion` varchar(255) DEFAULT NULL COMMENT '审核意见',
+  PRIMARY KEY (`id`),
+  KEY `merchant_id_index` (`merchant_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户URL列表';
