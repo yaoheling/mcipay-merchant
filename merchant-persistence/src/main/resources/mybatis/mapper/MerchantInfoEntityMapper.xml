@@ -6,12 +6,10 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="full_name" jdbcType="VARCHAR" property="fullName" />
     <result column="short_name" jdbcType="VARCHAR" property="shortName" />
-    <result column="business_scop" jdbcType="VARCHAR" property="businessScop" />
+    <result column="business_scope" jdbcType="VARCHAR" property="businessScope" />
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="open_time" jdbcType="TIMESTAMP" property="openTime" />
-    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
     <result column="mobile_number" jdbcType="VARCHAR" property="mobileNumber" />
     <result column="service_hotline" jdbcType="VARCHAR" property="serviceHotline" />
@@ -78,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, status, full_name, short_name, business_scop, city, address, email, open_time, 
-    end_time, phone_number, mobile_number, service_hotline, qq, operator_id, create_time
+    id, status, full_name, short_name, business_scope, city, address, email, phone_number, 
+    mobile_number, service_hotline, qq, operator_id, create_time
   </sql>
   <select id="selectByExample" parameterType="com.mcipay.persistence.entity.MerchantInfoEntityCriteria" resultMap="BaseResultMap">
     select
@@ -117,17 +115,15 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.MerchantInfoEntity" useGeneratedKeys="true">
     insert into merchant_info (status, full_name, short_name, 
-      business_scop, city, address, 
-      email, open_time, end_time, 
-      phone_number, mobile_number, service_hotline, 
-      qq, operator_id, create_time
-      )
+      business_scope, city, address, 
+      email, phone_number, mobile_number, 
+      service_hotline, qq, operator_id, 
+      create_time)
     values (#{status,jdbcType=INTEGER}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
-      #{businessScop,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{openTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
-      #{phoneNumber,jdbcType=VARCHAR}, #{mobileNumber,jdbcType=VARCHAR}, #{serviceHotline,jdbcType=VARCHAR}, 
-      #{qq,jdbcType=VARCHAR}, #{operatorId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{businessScope,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{mobileNumber,jdbcType=VARCHAR}, 
+      #{serviceHotline,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{operatorId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mcipay.persistence.entity.MerchantInfoEntity" useGeneratedKeys="true">
     insert into merchant_info
@@ -141,8 +137,8 @@
       <if test="shortName != null">
         short_name,
       </if>
-      <if test="businessScop != null">
-        business_scop,
+      <if test="businessScope != null">
+        business_scope,
       </if>
       <if test="city != null">
         city,
@@ -152,12 +148,6 @@
       </if>
       <if test="email != null">
         email,
-      </if>
-      <if test="openTime != null">
-        open_time,
-      </if>
-      <if test="endTime != null">
-        end_time,
       </if>
       <if test="phoneNumber != null">
         phone_number,
@@ -188,8 +178,8 @@
       <if test="shortName != null">
         #{shortName,jdbcType=VARCHAR},
       </if>
-      <if test="businessScop != null">
-        #{businessScop,jdbcType=VARCHAR},
+      <if test="businessScope != null">
+        #{businessScope,jdbcType=VARCHAR},
       </if>
       <if test="city != null">
         #{city,jdbcType=VARCHAR},
@@ -199,12 +189,6 @@
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="openTime != null">
-        #{openTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null">
-        #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="phoneNumber != null">
         #{phoneNumber,jdbcType=VARCHAR},
@@ -226,7 +210,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mcipay.persistence.entity.MerchantInfoEntityCriteria" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.mcipay.persistence.entity.MerchantInfoEntityCriteria" resultType="java.lang.Long">
     select count(*) from merchant_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -247,8 +231,8 @@
       <if test="record.shortName != null">
         short_name = #{record.shortName,jdbcType=VARCHAR},
       </if>
-      <if test="record.businessScop != null">
-        business_scop = #{record.businessScop,jdbcType=VARCHAR},
+      <if test="record.businessScope != null">
+        business_scope = #{record.businessScope,jdbcType=VARCHAR},
       </if>
       <if test="record.city != null">
         city = #{record.city,jdbcType=VARCHAR},
@@ -258,12 +242,6 @@
       </if>
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.openTime != null">
-        open_time = #{record.openTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.endTime != null">
-        end_time = #{record.endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.phoneNumber != null">
         phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
@@ -294,12 +272,10 @@
       status = #{record.status,jdbcType=INTEGER},
       full_name = #{record.fullName,jdbcType=VARCHAR},
       short_name = #{record.shortName,jdbcType=VARCHAR},
-      business_scop = #{record.businessScop,jdbcType=VARCHAR},
+      business_scope = #{record.businessScope,jdbcType=VARCHAR},
       city = #{record.city,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
-      open_time = #{record.openTime,jdbcType=TIMESTAMP},
-      end_time = #{record.endTime,jdbcType=TIMESTAMP},
       phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
       mobile_number = #{record.mobileNumber,jdbcType=VARCHAR},
       service_hotline = #{record.serviceHotline,jdbcType=VARCHAR},
@@ -322,8 +298,8 @@
       <if test="shortName != null">
         short_name = #{shortName,jdbcType=VARCHAR},
       </if>
-      <if test="businessScop != null">
-        business_scop = #{businessScop,jdbcType=VARCHAR},
+      <if test="businessScope != null">
+        business_scope = #{businessScope,jdbcType=VARCHAR},
       </if>
       <if test="city != null">
         city = #{city,jdbcType=VARCHAR},
@@ -333,12 +309,6 @@
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="openTime != null">
-        open_time = #{openTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null">
-        end_time = #{endTime,jdbcType=TIMESTAMP},
       </if>
       <if test="phoneNumber != null">
         phone_number = #{phoneNumber,jdbcType=VARCHAR},
@@ -366,12 +336,10 @@
     set status = #{status,jdbcType=INTEGER},
       full_name = #{fullName,jdbcType=VARCHAR},
       short_name = #{shortName,jdbcType=VARCHAR},
-      business_scop = #{businessScop,jdbcType=VARCHAR},
+      business_scope = #{businessScope,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      open_time = #{openTime,jdbcType=TIMESTAMP},
-      end_time = #{endTime,jdbcType=TIMESTAMP},
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
       mobile_number = #{mobileNumber,jdbcType=VARCHAR},
       service_hotline = #{serviceHotline,jdbcType=VARCHAR},

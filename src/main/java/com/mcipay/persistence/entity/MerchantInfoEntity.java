@@ -5,8 +5,6 @@ import java.util.Date;
 public class MerchantInfoEntity {
     private Integer id;
 
-    private Integer status;
-
     private String fullName;
 
     private String shortName;
@@ -18,10 +16,6 @@ public class MerchantInfoEntity {
     private String address;
 
     private String email;
-
-    private Date openTime;
-
-    private Date endTime;
 
     private String phoneNumber;
 
@@ -41,14 +35,6 @@ public class MerchantInfoEntity {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 
     public String getFullName() {
@@ -97,22 +83,6 @@ public class MerchantInfoEntity {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
-    }
-
-    public Date getOpenTime() {
-        return openTime;
-    }
-
-    public void setOpenTime(Date openTime) {
-        this.openTime = openTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
     }
 
     public String getPhoneNumber() {

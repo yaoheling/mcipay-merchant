@@ -75,9 +75,10 @@ CREATE TABLE `payment_journal` (
 --  2018-05-31 start
 CREATE TABLE `merchant_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` int(11) DEFAULT NULL COMMENT '状态： 0：禁用；1：启用',
   `full_name` varchar(128) DEFAULT NULL COMMENT '商户全称',
   `short_name` varchar(64) DEFAULT NULL COMMENT '商户简称',
-  `business_scop` varchar(64) DEFAULT NULL COMMENT '经营范围',
+  `business_scope` varchar(64) DEFAULT NULL COMMENT '经营范围',
   `city` varchar(64) DEFAULT NULL COMMENT '所在城市',
   `address` varchar(128) DEFAULT NULL COMMENT '地址',
   `email` varchar(128) DEFAULT NULL COMMENT '邮箱',
@@ -120,6 +121,7 @@ CREATE TABLE `merchant_account` (
 ) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8 COMMENT='商户账目表';
 -- 2018-06-12 END   **************************************************************************
 
+-- 2018-06-20 START **************************************************************************
 CREATE TABLE `merchant_url` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `merchant_id` int(11) NOT NULL COMMENT '商户ID',
@@ -132,3 +134,15 @@ CREATE TABLE `merchant_url` (
   PRIMARY KEY (`id`),
   KEY `merchant_id_index` (`merchant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户URL列表';
+
+CREATE TABLE `merchant_service_charge` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `merchant_id` int(11) NOT NULL COMMENT '商户ID',
+  `status` int(11) DEFAULT NULL COMMENT '状态： 0：禁用；1：启用',
+  `card_type` varchar(32) DEFAULT NULL COMMENT '卡类型',
+  `service_charge` decimal(10,2) DEFAULT NULL COMMENT '服务费',
+  `operator_id` varchar(255) DEFAULT NULL COMMENT '操作人ID',
+  `modify_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商户支付手续费';
+-- 2018-06-20 END **************************************************************************

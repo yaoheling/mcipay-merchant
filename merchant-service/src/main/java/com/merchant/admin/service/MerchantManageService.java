@@ -3,15 +3,14 @@ package com.merchant.admin.service;
 import com.mcipay.page.Page;
 import com.mcipay.persistence.entity.*;
 import com.mcipay.persistence.entity.manual.CompleteMerchantInfoEntity;
-import com.mcipay.persistence.mapper.CompleteMerchantInfoEntityMapper;
-import com.mcipay.persistence.mapper.MerchantBankInfoEntityMapper;
-import com.mcipay.persistence.mapper.MerchantInfoEntityMapper;
-import com.mcipay.persistence.mapper.MerchantUrlEntityMapper;
+import com.mcipay.persistence.mapper.*;
 import com.merchant.admin.bo.GetMerchantUrlRequest;
+import com.merchant.admin.bo.MerchantServiceCharge;
 import com.merchant.admin.bo.QueryMerchantRequest;
 import com.merchant.admin.bo.SaveMerchantInfo;
 import com.merchant.util.*;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -35,6 +34,9 @@ public class MerchantManageService {
     @Resource(name = "merchantUrlEntityMapper")
     private MerchantUrlEntityMapper merchantUrlMapper;
 
+    @Resource(name = "merchantServiceChargeEntityMapper")
+    private MerchantServiceChargeEntityMapper merchantServiceChargeMapper;
+
     /**
      * 保存商户信息
      */
@@ -53,6 +55,7 @@ public class MerchantManageService {
         }
 
         // 保存商户
+        merchantInfo.setStatus(OpenCloseStatus.CLOSE.getStatus());
         merchantInfo.setOperatorId(SessionUtil.getUserId());
         merchantInfo.setCreateTime(new Date());
         merchantInfoMapper.insert(merchantInfo);
@@ -77,6 +80,9 @@ public class MerchantManageService {
         MerchantInfoEntityCriteria.Criteria criteria = condition.createCriteria();
         if(request.getMerchantId() != null) {
             criteria.andIdEqualTo(request.getMerchantId());
+        }
+        if(StringUtils.isNoneBlank(request.getMerchantNameKey())) {
+            criteria.andFullNameLike(request.getMerchantNameKey());
         }
         if(request.getPageNo() != null && request.getPageSize() != null) {
             Page page = new Page(request.getSqlStart(), request.getPageSize());
@@ -105,6 +111,12 @@ public class MerchantManageService {
         if(merchantInfoEntity == null) {
             response.error();
             response.setMessage("商户号" + merchantId + "不存在!");
+            return response;
+        }
+        OpenCloseStatus oc = OpenCloseStatus.getOpenCloseStatus(status);
+        if(oc == null) {
+            response.error();
+            response.setMessage("状态[" + status + "]值不匹配!");
             return response;
         }
         MerchantInfoEntity record = new MerchantInfoEntity();
@@ -165,6 +177,40 @@ public class MerchantManageService {
 
         BaseResponse response = new BaseResponse(ResponseCode.SUCCESS);
         response.setData(queryResponse);
+        return response;
+    }
+
+    /**
+     * 更新商户URL状态
+     */
+    public BaseResponse updateMerchantUrlStatus(Integer id, Integer status) {
+        BaseResponse response = new BaseResponse();
+        MerchantUrlStatus merchantUrlStatus = MerchantUrlStatus.getMerchantUrlStatus(status);
+        if(merchantUrlStatus == null) {
+            response.error();
+            response.setMessage("非法 url status");
+            return response;
+        }
+        MerchantUrlEntity merchantUrl = new MerchantUrlEntity();
+        merchantUrl.setId(id);
+        merchantUrl.setStatus(status);
+
+        merchantUrlMapper.updateByPrimaryKeySelective(merchantUrl);
+        response.success();
+        return response;
+    }
+
+    /**
+     * 保存商户服务费
+     */
+    public BaseResponse saveMerchantServiceCharge(MerchantServiceCharge serviceCharge) {
+        BaseResponse response = new BaseResponse();
+        MerchantServiceChargeEntity record = new MerchantServiceChargeEntity();
+        BeanUtils.copyProperties(serviceCharge, record);
+        record.setStatus(OpenCloseStatus.OPEN.getStatus());
+        merchantServiceChargeMapper.insert(record);
+
+        response.success();
         return response;
     }
 

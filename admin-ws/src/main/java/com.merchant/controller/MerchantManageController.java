@@ -1,11 +1,13 @@
 package com.merchant.controller;
 
 import com.merchant.admin.bo.GetMerchantUrlRequest;
+import com.merchant.admin.bo.MerchantServiceCharge;
 import com.merchant.admin.bo.QueryMerchantRequest;
 import com.merchant.admin.bo.SaveMerchantInfo;
 import com.merchant.admin.service.MerchantManageService;
-import com.merchant.util.QueryResponse;
 import com.merchant.util.BaseResponse;
+import com.merchant.util.QueryResponse;
+import com.merchant.util.ValidateAop;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(value = "商户管理接口", description="商户管理服务API根目录")
 @Controller
-@RequestMapping("/admin/merchant/manage")
+@RequestMapping("/api/admin/merchant/manage")
 public class MerchantManageController {
 
     @Autowired
@@ -98,6 +100,27 @@ public class MerchantManageController {
     @ResponseBody
     public BaseResponse pageMerchantUrl(GetMerchantUrlRequest request) {
         BaseResponse response = merchantManageService.getMerchantUrl(request);
+        return response;
+    }
+
+    @ApiOperation("更新商户URL状态")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "url主键", required = true, dataType = "Long"),
+            @ApiImplicitParam(name = "status", value = "URL审核状态 1：审核通过；2：驳回", required = true, dataType = "Long")
+    })
+    @PostMapping(value = "/updateMerchantUrlStatus")
+    @ResponseBody
+    public BaseResponse updateMerchantUrlStatus(Integer id, Integer status) {
+        BaseResponse response = merchantManageService.updateMerchantUrlStatus(id, status);
+        return response;
+    }
+
+    @ApiOperation("保存商户服务费")
+    @PostMapping(value = "/saveMerchantServiceCharge")
+    @ResponseBody
+    @ValidateAop
+    public BaseResponse saveMerchantServiceCharge(MerchantServiceCharge serviceCharge) {
+        BaseResponse response = merchantManageService.saveMerchantServiceCharge(serviceCharge);
         return response;
     }
 

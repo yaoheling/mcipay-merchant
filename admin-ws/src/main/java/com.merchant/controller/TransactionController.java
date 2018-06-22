@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Api(value = "商户交易接口", description="商户交易API根目录")
 @Controller
-@RequestMapping("/merchant/transaction")
+@RequestMapping("/api/merchant/transaction")
 public class TransactionController {
 
     @Autowired

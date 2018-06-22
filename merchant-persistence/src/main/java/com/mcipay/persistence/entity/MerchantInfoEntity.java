@@ -11,17 +11,13 @@ public class MerchantInfoEntity {
 
     private String shortName;
 
-    private String businessScop;
+    private String businessScope;
 
     private String city;
 
     private String address;
 
     private String email;
-
-    private Date openTime;
-
-    private Date endTime;
 
     private String phoneNumber;
 
@@ -67,12 +63,12 @@ public class MerchantInfoEntity {
         this.shortName = shortName == null ? null : shortName.trim();
     }
 
-    public String getBusinessScop() {
-        return businessScop;
+    public String getBusinessScope() {
+        return businessScope;
     }
 
-    public void setBusinessScop(String businessScop) {
-        this.businessScop = businessScop == null ? null : businessScop.trim();
+    public void setBusinessScope(String businessScope) {
+        this.businessScope = businessScope == null ? null : businessScope.trim();
     }
 
     public String getCity() {
@@ -97,22 +93,6 @@ public class MerchantInfoEntity {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
-    }
-
-    public Date getOpenTime() {
-        return openTime;
-    }
-
-    public void setOpenTime(Date openTime) {
-        this.openTime = openTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
     }
 
     public String getPhoneNumber() {

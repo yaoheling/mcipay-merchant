@@ -376,73 +376,73 @@ public class MerchantInfoEntityCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopIsNull() {
-            addCriterion("business_scop is null");
+        public Criteria andBusinessScopeIsNull() {
+            addCriterion("business_scope is null");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopIsNotNull() {
-            addCriterion("business_scop is not null");
+        public Criteria andBusinessScopeIsNotNull() {
+            addCriterion("business_scope is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopEqualTo(String value) {
-            addCriterion("business_scop =", value, "businessScop");
+        public Criteria andBusinessScopeEqualTo(String value) {
+            addCriterion("business_scope =", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopNotEqualTo(String value) {
-            addCriterion("business_scop <>", value, "businessScop");
+        public Criteria andBusinessScopeNotEqualTo(String value) {
+            addCriterion("business_scope <>", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopGreaterThan(String value) {
-            addCriterion("business_scop >", value, "businessScop");
+        public Criteria andBusinessScopeGreaterThan(String value) {
+            addCriterion("business_scope >", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopGreaterThanOrEqualTo(String value) {
-            addCriterion("business_scop >=", value, "businessScop");
+        public Criteria andBusinessScopeGreaterThanOrEqualTo(String value) {
+            addCriterion("business_scope >=", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopLessThan(String value) {
-            addCriterion("business_scop <", value, "businessScop");
+        public Criteria andBusinessScopeLessThan(String value) {
+            addCriterion("business_scope <", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopLessThanOrEqualTo(String value) {
-            addCriterion("business_scop <=", value, "businessScop");
+        public Criteria andBusinessScopeLessThanOrEqualTo(String value) {
+            addCriterion("business_scope <=", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopLike(String value) {
-            addCriterion("business_scop like", value, "businessScop");
+        public Criteria andBusinessScopeLike(String value) {
+            addCriterion("business_scope like", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopNotLike(String value) {
-            addCriterion("business_scop not like", value, "businessScop");
+        public Criteria andBusinessScopeNotLike(String value) {
+            addCriterion("business_scope not like", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopIn(List<String> values) {
-            addCriterion("business_scop in", values, "businessScop");
+        public Criteria andBusinessScopeIn(List<String> values) {
+            addCriterion("business_scope in", values, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopNotIn(List<String> values) {
-            addCriterion("business_scop not in", values, "businessScop");
+        public Criteria andBusinessScopeNotIn(List<String> values) {
+            addCriterion("business_scope not in", values, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopBetween(String value1, String value2) {
-            addCriterion("business_scop between", value1, value2, "businessScop");
+        public Criteria andBusinessScopeBetween(String value1, String value2) {
+            addCriterion("business_scope between", value1, value2, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopNotBetween(String value1, String value2) {
-            addCriterion("business_scop not between", value1, value2, "businessScop");
+        public Criteria andBusinessScopeNotBetween(String value1, String value2) {
+            addCriterion("business_scope not between", value1, value2, "businessScope");
             return (Criteria) this;
         }
 
@@ -653,126 +653,6 @@ public class MerchantInfoEntityCriteria {
 
         public Criteria andEmailNotBetween(String value1, String value2) {
             addCriterion("email not between", value1, value2, "email");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeIsNull() {
-            addCriterion("open_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeIsNotNull() {
-            addCriterion("open_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeEqualTo(Date value) {
-            addCriterion("open_time =", value, "openTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeNotEqualTo(Date value) {
-            addCriterion("open_time <>", value, "openTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeGreaterThan(Date value) {
-            addCriterion("open_time >", value, "openTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("open_time >=", value, "openTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeLessThan(Date value) {
-            addCriterion("open_time <", value, "openTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeLessThanOrEqualTo(Date value) {
-            addCriterion("open_time <=", value, "openTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeIn(List<Date> values) {
-            addCriterion("open_time in", values, "openTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeNotIn(List<Date> values) {
-            addCriterion("open_time not in", values, "openTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeBetween(Date value1, Date value2) {
-            addCriterion("open_time between", value1, value2, "openTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOpenTimeNotBetween(Date value1, Date value2) {
-            addCriterion("open_time not between", value1, value2, "openTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeIsNull() {
-            addCriterion("end_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeIsNotNull() {
-            addCriterion("end_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeEqualTo(Date value) {
-            addCriterion("end_time =", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeNotEqualTo(Date value) {
-            addCriterion("end_time <>", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeGreaterThan(Date value) {
-            addCriterion("end_time >", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("end_time >=", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeLessThan(Date value) {
-            addCriterion("end_time <", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeLessThanOrEqualTo(Date value) {
-            addCriterion("end_time <=", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeIn(List<Date> values) {
-            addCriterion("end_time in", values, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeNotIn(List<Date> values) {
-            addCriterion("end_time not in", values, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeBetween(Date value1, Date value2) {
-            addCriterion("end_time between", value1, value2, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeNotBetween(Date value1, Date value2) {
-            addCriterion("end_time not between", value1, value2, "endTime");
             return (Criteria) this;
         }
 
