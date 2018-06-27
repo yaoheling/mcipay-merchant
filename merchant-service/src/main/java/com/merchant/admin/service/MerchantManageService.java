@@ -91,7 +91,7 @@ public class MerchantManageService {
         List<CompleteMerchantInfoEntity> list = completeMerchantInfoMapper.selectByExample(condition);
 
         MerchantInfoEntityCriteria countCondition = new MerchantInfoEntityCriteria();
-        int size = merchantInfoMapper.countByExample(countCondition);
+        long size = merchantInfoMapper.countByExample(countCondition);
 
         QueryResponse queryResponse = new QueryResponse();
         queryResponse.setRows(list);

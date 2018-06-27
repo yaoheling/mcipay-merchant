@@ -4,14 +4,14 @@ import java.util.Collection;
 
 public class QueryResponse {
 
-    private int totalCount;
+    private long totalCount;
     private Collection rows;
 
-    public int getTotalCount() {
+    public long getTotalCount() {
         return totalCount;
     }
 
-    public void setTotalCount(int totalCount) {
+    public void setTotalCount(long totalCount) {
         this.totalCount = totalCount;
     }
 
