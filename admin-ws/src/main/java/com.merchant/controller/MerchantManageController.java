@@ -1,9 +1,6 @@
 package com.merchant.controller;
 
-import com.merchant.admin.bo.GetMerchantUrlRequest;
-import com.merchant.admin.bo.MerchantServiceCharge;
-import com.merchant.admin.bo.QueryMerchantRequest;
-import com.merchant.admin.bo.SaveMerchantInfo;
+import com.merchant.admin.bo.*;
 import com.merchant.admin.service.MerchantManageService;
 import com.merchant.util.BaseResponse;
 import com.merchant.util.QueryResponse;
@@ -42,7 +39,7 @@ public class MerchantManageController {
     })
     @GetMapping(value = "/getMerchantInfo")
     @ResponseBody
-    public BaseResponse getMerchantInfo(QueryMerchantRequest request) {
+    public BaseResponse getMerchantInfo(GetMerchantRequest request) {
         BaseResponse response = merchantManageService.queryMerchantList(request);
         if(response.isSuccess() && response.getData() != null) {
             QueryResponse queryResponse = (QueryResponse) response.getData();
@@ -64,7 +61,7 @@ public class MerchantManageController {
     })
     @GetMapping(value = "/pageMerchantInfo")
     @ResponseBody
-    public BaseResponse pageMerchantInfo(QueryMerchantRequest request) {
+    public BaseResponse pageMerchantInfo(GetMerchantRequest request) {
         BaseResponse response = merchantManageService.queryMerchantList(request);
         return response;
     }
@@ -121,6 +118,14 @@ public class MerchantManageController {
     @ValidateAop
     public BaseResponse saveMerchantServiceCharge(MerchantServiceCharge serviceCharge) {
         BaseResponse response = merchantManageService.saveMerchantServiceCharge(serviceCharge);
+        return response;
+    }
+
+    @ApiOperation("分页查询运单信息")
+    @GetMapping(value = "/pageMerchantWaybillAudit")
+    @ResponseBody
+    public BaseResponse pageMerchantWaybillAudit(GetMerchantWaybillAuditRequest request) {
+        BaseResponse response = merchantManageService.getMerchantWaybillAuditList(request);
         return response;
     }
 

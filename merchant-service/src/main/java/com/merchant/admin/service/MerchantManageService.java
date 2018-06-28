@@ -1,16 +1,16 @@
 package com.merchant.admin.service;
 
+import com.google.common.collect.Lists;
 import com.mcipay.page.Page;
 import com.mcipay.persistence.entity.*;
 import com.mcipay.persistence.entity.manual.CompleteMerchantInfoEntity;
 import com.mcipay.persistence.mapper.*;
-import com.merchant.admin.bo.GetMerchantUrlRequest;
-import com.merchant.admin.bo.MerchantServiceCharge;
-import com.merchant.admin.bo.QueryMerchantRequest;
-import com.merchant.admin.bo.SaveMerchantInfo;
+import com.merchant.admin.bo.*;
 import com.merchant.util.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -18,24 +18,35 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MerchantManageService {
 
-    @Resource(name = "merchantInfoEntityMapper")
-    private MerchantInfoEntityMapper merchantInfoMapper;
+    @Resource
+    private MerchantInfoEntityMapper merchantInfoEntityMapper;
 
-    @Resource(name = "merchantBankInfoEntityMapper")
-    private MerchantBankInfoEntityMapper merchantBankInfoMapper;
+    @Resource
+    private MerchantBankInfoEntityMapper merchantBankInfoEntityMapper;
 
-    @Resource(name = "completeMerchantInfoEntityMapper")
-    private CompleteMerchantInfoEntityMapper completeMerchantInfoMapper;
+    @Resource
+    private CompleteMerchantInfoEntityMapper completeMerchantInfoEntityMapper;
 
-    @Resource(name = "merchantUrlEntityMapper")
-    private MerchantUrlEntityMapper merchantUrlMapper;
+    @Resource
+    private MerchantUrlEntityMapper merchantUrlEntityMapper;
 
-    @Resource(name = "merchantServiceChargeEntityMapper")
+    @Resource
     private MerchantServiceChargeEntityMapper merchantServiceChargeMapper;
+
+    @Resource
+    private MerchantWaybillEntityMapper merchantWaybillEntityMapper;
+
+    @Resource
+    private MerchantTransactionEntityMapper merchantTransactionEntityMapper;
+
+    @Autowired
+    private SqlSession sqlSession;
 
     /**
      * 保存商户信息
@@ -47,7 +58,7 @@ public class MerchantManageService {
         MerchantInfoEntityCriteria condition = new MerchantInfoEntityCriteria();
         MerchantInfoEntityCriteria.Criteria criteria = condition.createCriteria();
         criteria.andFullNameEqualTo(merchantInfo.getFullName());
-        List<MerchantInfoEntity> existed = merchantInfoMapper.selectByExample(condition);
+        List<MerchantInfoEntity> existed = merchantInfoEntityMapper.selectByExample(condition);
         if(!CollectionUtils.isEmpty(existed)) {
             response.setCode(ResponseCode.ERROR);
             response.setMessage("商户[" + merchantInfo.getFullName() + "]已录入!");
@@ -58,13 +69,13 @@ public class MerchantManageService {
         merchantInfo.setStatus(OpenCloseStatus.CLOSE.getStatus());
         merchantInfo.setOperatorId(SessionUtil.getUserId());
         merchantInfo.setCreateTime(new Date());
-        merchantInfoMapper.insert(merchantInfo);
+        merchantInfoEntityMapper.insert(merchantInfo);
 
         // 保存商户结算银行信息
         if(!CollectionUtils.isEmpty(merchantBankInfoList)) {
             for (MerchantBankInfoEntity merchantBankInfo : merchantBankInfoList) {
                 merchantBankInfo.setMerchantId(merchantInfo.getId());
-                merchantBankInfoMapper.insert(merchantBankInfo);
+                merchantBankInfoEntityMapper.insert(merchantBankInfo);
             }
         }
 
@@ -75,7 +86,7 @@ public class MerchantManageService {
     /**
      * 商户信息查询
      */
-    public BaseResponse queryMerchantList(QueryMerchantRequest request) {
+    public BaseResponse queryMerchantList(GetMerchantRequest request) {
         MerchantInfoEntityCriteria condition = new MerchantInfoEntityCriteria();
         MerchantInfoEntityCriteria.Criteria criteria = condition.createCriteria();
         if(request.getMerchantId() != null) {
@@ -88,10 +99,10 @@ public class MerchantManageService {
             Page page = new Page(request.getSqlStart(), request.getPageSize());
             condition.setPage(page);
         }
-        List<CompleteMerchantInfoEntity> list = completeMerchantInfoMapper.selectByExample(condition);
+        List<CompleteMerchantInfoEntity> list = completeMerchantInfoEntityMapper.selectByExample(condition);
 
         MerchantInfoEntityCriteria countCondition = new MerchantInfoEntityCriteria();
-        long size = merchantInfoMapper.countByExample(countCondition);
+        long size = merchantInfoEntityMapper.countByExample(countCondition);
 
         QueryResponse queryResponse = new QueryResponse();
         queryResponse.setRows(list);
@@ -107,7 +118,7 @@ public class MerchantManageService {
      */
     public BaseResponse updateMerchantStatus(Integer merchantId, Integer status) {
         BaseResponse response = new BaseResponse();
-        MerchantInfoEntity merchantInfoEntity = merchantInfoMapper.selectByPrimaryKey(merchantId);
+        MerchantInfoEntity merchantInfoEntity = merchantInfoEntityMapper.selectByPrimaryKey(merchantId);
         if(merchantInfoEntity == null) {
             response.error();
             response.setMessage("商户号" + merchantId + "不存在!");
@@ -122,7 +133,7 @@ public class MerchantManageService {
         MerchantInfoEntity record = new MerchantInfoEntity();
         record.setId(merchantId);
         record.setStatus(status);
-        merchantInfoMapper.updateByPrimaryKey(record);
+        merchantInfoEntityMapper.updateByPrimaryKey(record);
         response.success();
         return response;
     }
@@ -131,7 +142,7 @@ public class MerchantManageService {
      * 更新商户信息
      */
     public BaseResponse updateMerchant(MerchantInfoEntity merchantInfo, List<MerchantBankInfoEntity> merchantBankInfoList) {
-        merchantInfoMapper.updateByPrimaryKeySelective(merchantInfo);
+        merchantInfoEntityMapper.updateByPrimaryKeySelective(merchantInfo);
         if(!merchantBankInfoList.isEmpty()) {
             MerchantBankInfoEntityCriteria condition = new MerchantBankInfoEntityCriteria();
             MerchantBankInfoEntityCriteria.Criteria criteria = condition.createCriteria();
@@ -140,7 +151,7 @@ public class MerchantManageService {
             MerchantBankInfoEntity bankInfo = merchantBankInfoList.get(0);
             bankInfo.setId(null);
             bankInfo.setMerchantId(null);
-            merchantBankInfoMapper.updateByExampleSelective(bankInfo, condition);
+            merchantBankInfoEntityMapper.updateByExampleSelective(bankInfo, condition);
         }
         BaseResponse response = new BaseResponse(ResponseCode.SUCCESS);
         return response;
@@ -168,8 +179,8 @@ public class MerchantManageService {
             Page page = new Page(request.getSqlStart(), request.getPageSize());
             condition.setPage(page);
         }
-        List<MerchantUrlEntity> result = merchantUrlMapper.selectByExample(condition);
-        long count = merchantUrlMapper.countByExample(condition);
+        List<MerchantUrlEntity> result = merchantUrlEntityMapper.selectByExample(condition);
+        long count = merchantUrlEntityMapper.countByExample(condition);
 
         QueryResponse queryResponse = new QueryResponse();
         queryResponse.setRows(result);
@@ -195,7 +206,7 @@ public class MerchantManageService {
         merchantUrl.setId(id);
         merchantUrl.setStatus(status);
 
-        merchantUrlMapper.updateByPrimaryKeySelective(merchantUrl);
+        merchantUrlEntityMapper.updateByPrimaryKeySelective(merchantUrl);
         response.success();
         return response;
     }
@@ -211,6 +222,59 @@ public class MerchantManageService {
         merchantServiceChargeMapper.insert(record);
 
         response.success();
+        return response;
+    }
+
+    /**
+     * 运单审核列表=交易信息 + 运单信息
+     */
+    public BaseResponse getMerchantWaybillAuditList(GetMerchantWaybillAuditRequest request) {
+        MerchantTransactionEntityCriteria condition = new MerchantTransactionEntityCriteria();
+        MerchantTransactionEntityCriteria.Criteria criteria = condition.createCriteria();
+        // 运单未提交的不进行展示
+        criteria.andWaybillStatusNotEqualTo(WaybillStatus.INIT.getStatus());
+        if(request.getMerchantTransactionId() != null) {
+            criteria.andIdEqualTo(request.getMerchantTransactionId());
+        }
+        if(request.getWaybillStatus() != null) {
+            criteria.andWaybillStatusEqualTo(request.getWaybillStatus());
+        }
+        if(request.getMerchantCreateTimeStart() != null && request.getMerchantCreateTimeEnd() != null) {
+            criteria.andMerchantCreateTimeBetween(request.getMerchantCreateTimeStart(), request.getMerchantCreateTimeEnd());
+        }
+        if(request.getPageNo() != null && request.getPageSize() != null) {
+            Page page = new Page(request.getSqlStart(), request.getPageSize());
+            condition.setPage(page);
+        }
+        List<MerchantTransactionEntity> result = merchantTransactionEntityMapper.selectByExample(condition);
+        List<Integer> transIdList = result.stream().map(transaction -> transaction.getId()).collect(Collectors.toList());
+
+        MerchantWaybillEntityCriteria waybillCondition = new MerchantWaybillEntityCriteria();
+        MerchantWaybillEntityCriteria.Criteria waybillCriteria = waybillCondition.createCriteria();
+        waybillCriteria.andMerchantTransactionIdIn(transIdList);
+        List<MerchantWaybillEntity> waybillList = merchantWaybillEntityMapper.selectByExample(waybillCondition);
+
+        List<MerchantWaybillAudit> merchantWaybillAuditList = Lists.newArrayList();
+        result.stream().forEach(transaction -> {
+            MerchantWaybillAudit merchantWaybillAudit = new MerchantWaybillAudit();
+            BeanUtils.copyProperties(transaction, merchantWaybillAudit);
+            Optional<MerchantWaybillEntity> optional = waybillList.stream()
+                    .filter(waybill -> waybill.getMerchantTransactionId().equals(transaction.getId())).findFirst();
+            if(optional.isPresent()) {
+                MerchantWaybillEntity merchantWaybillEntity = optional.get();
+                merchantWaybillAudit.setWaybillNo(merchantWaybillEntity.getWaybillNo());
+                merchantWaybillAudit.setMerchantCommitTime(merchantWaybillEntity.getMerchantCommitTime());
+            }
+            merchantWaybillAuditList.add(merchantWaybillAudit);
+        });
+        long count = merchantTransactionEntityMapper.countByExample(condition);
+
+        QueryResponse queryResponse = new QueryResponse();
+        queryResponse.setRows(merchantWaybillAuditList);
+        queryResponse.setTotalCount((int) count);
+
+        BaseResponse response = new BaseResponse(ResponseCode.SUCCESS);
+        response.setData(queryResponse);
         return response;
     }
 

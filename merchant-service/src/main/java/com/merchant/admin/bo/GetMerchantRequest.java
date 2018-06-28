@@ -2,7 +2,7 @@ package com.merchant.admin.bo;
 
 import com.merchant.util.QueryRequest;
 
-public class QueryMerchantRequest extends QueryRequest {
+public class GetMerchantRequest extends QueryRequest {
 
     private Integer merchantId;
 

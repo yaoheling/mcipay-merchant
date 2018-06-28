@@ -176,6 +176,66 @@ public class MerchantInfoEntityCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
         public Criteria andFullNameIsNull() {
             addCriterion("full_name is null");
             return (Criteria) this;
@@ -316,73 +376,73 @@ public class MerchantInfoEntityCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopIsNull() {
-            addCriterion("business_scop is null");
+        public Criteria andBusinessScopeIsNull() {
+            addCriterion("business_scope is null");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopIsNotNull() {
-            addCriterion("business_scop is not null");
+        public Criteria andBusinessScopeIsNotNull() {
+            addCriterion("business_scope is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopEqualTo(String value) {
-            addCriterion("business_scop =", value, "businessScop");
+        public Criteria andBusinessScopeEqualTo(String value) {
+            addCriterion("business_scope =", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopNotEqualTo(String value) {
-            addCriterion("business_scop <>", value, "businessScop");
+        public Criteria andBusinessScopeNotEqualTo(String value) {
+            addCriterion("business_scope <>", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopGreaterThan(String value) {
-            addCriterion("business_scop >", value, "businessScop");
+        public Criteria andBusinessScopeGreaterThan(String value) {
+            addCriterion("business_scope >", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopGreaterThanOrEqualTo(String value) {
-            addCriterion("business_scop >=", value, "businessScop");
+        public Criteria andBusinessScopeGreaterThanOrEqualTo(String value) {
+            addCriterion("business_scope >=", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopLessThan(String value) {
-            addCriterion("business_scop <", value, "businessScop");
+        public Criteria andBusinessScopeLessThan(String value) {
+            addCriterion("business_scope <", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopLessThanOrEqualTo(String value) {
-            addCriterion("business_scop <=", value, "businessScop");
+        public Criteria andBusinessScopeLessThanOrEqualTo(String value) {
+            addCriterion("business_scope <=", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopLike(String value) {
-            addCriterion("business_scop like", value, "businessScop");
+        public Criteria andBusinessScopeLike(String value) {
+            addCriterion("business_scope like", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopNotLike(String value) {
-            addCriterion("business_scop not like", value, "businessScop");
+        public Criteria andBusinessScopeNotLike(String value) {
+            addCriterion("business_scope not like", value, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopIn(List<String> values) {
-            addCriterion("business_scop in", values, "businessScop");
+        public Criteria andBusinessScopeIn(List<String> values) {
+            addCriterion("business_scope in", values, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopNotIn(List<String> values) {
-            addCriterion("business_scop not in", values, "businessScop");
+        public Criteria andBusinessScopeNotIn(List<String> values) {
+            addCriterion("business_scope not in", values, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopBetween(String value1, String value2) {
-            addCriterion("business_scop between", value1, value2, "businessScop");
+        public Criteria andBusinessScopeBetween(String value1, String value2) {
+            addCriterion("business_scope between", value1, value2, "businessScope");
             return (Criteria) this;
         }
 
-        public Criteria andBusinessScopNotBetween(String value1, String value2) {
-            addCriterion("business_scop not between", value1, value2, "businessScop");
+        public Criteria andBusinessScopeNotBetween(String value1, String value2) {
+            addCriterion("business_scope not between", value1, value2, "businessScope");
             return (Criteria) this;
         }
 

@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface MerchantWaybillEntityMapper {
-    int countByExample(MerchantWaybillEntityCriteria example);
+    long countByExample(MerchantWaybillEntityCriteria example);
 
     int deleteByExample(MerchantWaybillEntityCriteria example);
 

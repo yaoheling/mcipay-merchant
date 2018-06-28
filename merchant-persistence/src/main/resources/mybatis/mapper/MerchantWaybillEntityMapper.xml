@@ -203,7 +203,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.mcipay.persistence.entity.MerchantWaybillEntityCriteria" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.mcipay.persistence.entity.MerchantWaybillEntityCriteria" resultType="java.lang.Long">
     select count(*) from merchant_waybill
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

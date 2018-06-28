@@ -29,6 +29,7 @@ public class PaymentService {
         record.setTransStatus(paymentStatus);
         record.setTransModifyTime(new Date());
         paymentJournalMapper.updateByPrimaryKeySelective(record);
+        //TODO 通知商户交易成功
     }
 
 }

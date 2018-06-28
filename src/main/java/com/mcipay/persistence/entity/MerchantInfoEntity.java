@@ -5,11 +5,13 @@ import java.util.Date;
 public class MerchantInfoEntity {
     private Integer id;
 
+    private Integer status;
+
     private String fullName;
 
     private String shortName;
 
-    private String businessScop;
+    private String businessScope;
 
     private String city;
 
@@ -37,6 +39,14 @@ public class MerchantInfoEntity {
         this.id = id;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -53,12 +63,12 @@ public class MerchantInfoEntity {
         this.shortName = shortName == null ? null : shortName.trim();
     }
 
-    public String getBusinessScop() {
-        return businessScop;
+    public String getBusinessScope() {
+        return businessScope;
     }
 
-    public void setBusinessScop(String businessScop) {
-        this.businessScop = businessScop == null ? null : businessScop.trim();
+    public void setBusinessScope(String businessScope) {
+        this.businessScope = businessScope == null ? null : businessScope.trim();
     }
 
     public String getCity() {
