@@ -119,6 +119,12 @@
             <generatedKey column="id" sqlStatement="JDBC" identity="true" />
         </table>-->
 
+        <!--<table tableName="website" domainObjectName="Website" enableCountByExample="true"
+               enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
+            <property name="useActualColumnNames" value="false" />
+            <generatedKey column="id" sqlStatement="JDBC" identity="true" />
+        </table>-->
+
         <!--<table tableName="merchant_service_charge" domainObjectName="MerchantServiceChargeEntity" enableCountByExample="true"
                enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" >
             <property name="useActualColumnNames" value="false" />
