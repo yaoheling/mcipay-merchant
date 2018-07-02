@@ -1,7 +1,5 @@
 package com.merchant.client.service;
 
-import com.mcipay.page.Page;
-import com.mcipay.persistence.entity.User;
 import com.mcipay.persistence.entity.Website;
 import com.mcipay.persistence.entity.WebsiteCriteria;
 import com.mcipay.persistence.mapper.WebsiteMapper;
@@ -26,7 +24,7 @@ public class WebsiteService {
     @Resource
     private WebsiteMapper websiteMapper;
 
-    public List<Website> get(Integer status, Date startDate, Date endDate, String url) {
+    /*public List<Website> get(Integer status, Date startDate, Date endDate, String url) {
         WebsiteCriteria criteria = new WebsiteCriteria();
         WebsiteCriteria.Criteria query = criteria.or();
         if (status != null) {
@@ -42,7 +40,7 @@ public class WebsiteService {
             query.andUrlLike(url + "%");
         }
         return websiteMapper.selectByExample(criteria);
-    }
+    }*/
 
     @Transactional
     public int save(String url, Integer userId, String remark) {
@@ -94,19 +92,22 @@ public class WebsiteService {
         }
     }
 
-    public List<User> getList(Page page, User user) {
-        /*UserCriteria criteria = new UserCriteria();
-        UserCriteria.Criteria query = criteria.or();
-        if (StringUtils.isNotBlank(user.getUsername())) {
-            query.andUsernameEqualTo(user.getUsername());
+    public List<Website> get(Integer status, Date startDate, Date endDate, String url) {
+        WebsiteCriteria criteria = new WebsiteCriteria();
+        WebsiteCriteria.Criteria query = criteria.or();
+        if (status != null) {
+            query.andStatusEqualTo(status);
         }
-        if (StringUtils.isNotBlank(user.getName())) {
-            query.andNameEqualTo(user.getName());
+        if (startDate != null) {
+            query.andCreateTimeGreaterThanOrEqualTo(startDate);
         }
-        criteria.setPage(page);
-        criteria.setOrderByClause(" id desc ");
-        return userMapper.selectByExample(criteria);*/
-        return null;
+        if (endDate != null) {
+            query.andCreateTimeLessThan(DateUtils.getSpecificTime(endDate, 1));
+        }
+        if (StringUtils.isBlank(url)) {
+            query.andUrlLike(url + "%");
+        }
+        return websiteMapper.selectByExample(criteria);
     }
 
 }
